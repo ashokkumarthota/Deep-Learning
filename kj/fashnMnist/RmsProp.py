@@ -1,22 +1,24 @@
 import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
-class MomentumGradiantDecent(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh'
-                ):
+
+class RmsProp(NeuralNetwork):
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=100,HiddenLayerNuron=[60,10],activation='sigmoid'
+                 ):
+                
           
                 # invoking the __init__ of the parent class 
                 NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation)
                 
                 
           
-    def TrainWithMomentumGradientDescent(self,b=0.1,eta=0.1,gamma=.9,batch=0):
+    def TrainWithRMSProp(self,beta=0.9,batch=0):
         #initialize all parameters
         if batch!=0:
             self.batch=batch
-        print('Starting Momentum Gradient Descent')
+        print('Starting RMSProp')
         print('.....................................')
-        v_w, v_b  = self.DW, self.DB
+        v_w,v_b  = self.DW, self.DB
         for epoch in range(self.epochs):
             
             self.resetWeightDerivative()
@@ -28,13 +30,15 @@ class MomentumGradiantDecent(NeuralNetwork):
                 self.backprop()
                 
             #Update parameter and return new v_w and v_b
-            v_w, v_b=self.updateParamForMomentumGradientDescent(v_w, v_b,eta,gamma)
-                   
+            v_w,v_b=self.updateParamWithrms( beta,v_w,v_b,epoch+1)
+               
             #verify loss after each epoch
             self.xBatch = self.x
             self.yBatch  =self.y
+           
             pred=self.feedforward()
-            acc=self.accurecy(pred,self.y)
+            
+            acc=self.accurecy(pred,self.yBatch)
             loss=self.calculateLoss()
             
             
@@ -43,15 +47,25 @@ class MomentumGradiantDecent(NeuralNetwork):
         print('Completed')
         print('.....................................')
         
-    def updateParamForMomentumGradientDescent(self,v_w,v_b,eta,gamma): 
+    def updateParamWithrms(self, beta,v_w,v_b,epoch): 
         totalLayer=len(self.HiddenLayerNuron)
+        
+        betaDash=(1-beta)
+        
+        eps=.0001#small number
         for i in range(totalLayer):
-            v_w[i]= gamma*v_w[i]+eta* self.DW[i]  
-            v_b[i]= gamma*v_b[i]+eta* self.DB[i]
-            self.W[i] = self.W[i] - (self.lr)*v_w[i]
-            self.b[i] = self.b[i] - (self.lr)* v_b[i]
+           
+            vw= (beta*v_w[i])+(betaDash* np.square(self.DW[i]))
+            vb= (beta*v_b[i])+(betaDash* np.square(self.DB[i]))
+            vw1= np.sqrt(vw+eps)
+            vb1= np.sqrt(vb+eps)
+            self.W[i] = self.W[i] - (self.lr/vw1)*(self.DW[i] )
+            self.b[i] = self.b[i] - (self.lr/vb1)* (self.DB[i] )
             
-        return v_w,v_b
+            v_w[i]=vw1
+            v_b[i]=vb1
+        
+        return v_w,v_b       
    
     
             
