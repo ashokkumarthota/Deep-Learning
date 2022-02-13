@@ -1,18 +1,25 @@
 import numpy as np
+import math
 class NeuralNetwork:
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=0,HiddenLayerNuron=[60,10],activation='tanh' ):
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=0,HiddenLayerNuron=[60,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9):
        
         
         self.HiddenLayerNuron=HiddenLayerNuron
+        
+        
         self.x = x
         self.y = y
-        
+        self.decay_rate=decay_rate
         #define batch size
-        self.batch=self.x.shape[0]
+        self.batch=32
         if (batch!=0):
             self.batch=batch
             
+            
+        self.beta1=beta1
+        self.beta2=beta2
         self.epochs = epochs
+        self.fixedlr = lr
         self.lr = lr
         self.activation=activation
         self.loss = []
@@ -23,18 +30,31 @@ class NeuralNetwork:
         self.yBatch=y
          
       
-    
+    def stepDecay(self,currstep,epoch):
+        # exponential decay
+        alpha = currstep / epoch
+        return self.lr * math.exp(-self.decay_rate * alpha)
+    def momentumUpdate(self,t,maxm=.999):
+        x=np.log(np.floor(t/250)+1)/np.log(2)
+        x=1-2**(-1-x)
+        return min(x,maxm)
     def init_weights(self):
         self.W=[]
         self.b=[]
         self.DW=[]
         self.DB=[]
+        bounds=(-0.1, 0.1)
         prevInput=self.x.shape[1]
         for i in self.HiddenLayerNuron:
-            self.W.append(np.random.randn(prevInput ,i))
+            sd = np.sqrt(6.0 / (prevInput + i))
+            lower_bnd, upper_bnd =-sd,sd# 0,sd
+            distw = np.random.uniform(low=lower_bnd, high=upper_bnd, size=(prevInput ,i))
+            distb = np.random.uniform(low=lower_bnd, high=upper_bnd, size=(i))
+          
+            self.W.append(distw)
             self.DW.append(np.zeros((prevInput ,i)))
             prevInput=i
-            self.b.append(np.random.randn(i))
+            self.b.append(distb)
             x=np.zeros(i)
             self.DB.append(x)
          
@@ -181,18 +201,17 @@ class NeuralNetwork:
         return pred
     
     def shuffle(self):
-        idx = [i for i in range(self.input.shape[0])]
+        idx = [i for i in range(self.x.shape[0])]
         np.random.shuffle(idx)
-        self.input = self.input[idx]
-        self.target = self.target[idx]
+        self.x = self.x[idx]
+        self.y = self.y[idx]
         
         
     def calculateLoss(self):
         self.loss=[]
         self.error = (-1)*np.log(self.yHat)*self.yBatch
-       
-        self.error=np.sum(self.error,axis=1)
         
+        self.error=np.sum(self.error,axis=1)
         loss=np.mean(self.error)
         return loss
     
@@ -226,11 +245,12 @@ class NeuralNetwork:
             
             #print details 
             self.printDetails(epoch,self.epochs,acc,loss)
+        print()
         print('Completed') 
         print('.....................................')
         
     def printDetails(self,epoch,totalepoch,acc,loss):
-        if((epoch+1)%10==0):
+        if((epoch+1)%50==0):
             print('\r steps={}/{} , Accuraacy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5))) 
         else:
              print('\r steps={}/{} , Accuraacy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5)),end =" ") 
