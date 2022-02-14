@@ -24,16 +24,18 @@ class NAG(NeuralNetwork):
         for epoch in range(self.epochs):
             gamma= self.momentumUpdate(epoch+1)
             
-            vw=self.W
-            vb=self.b
-            for w in range(totalLayer):
-                self.W[w]=self.W[w]-gamma*prev_w[w]
-                self.b[w]=self.b[w]-gamma*prev_b[w]
+            
+            
+            
                 
             for i in range(0, self.x.shape[0], int(self.batch)):
                     #update weight and bias
                 self.resetWeightDerivative()
-           
+                vw=self.W
+                vb=self.b
+                for w in range(totalLayer):
+                    self.W[w]=self.W[w]-gamma*prev_w[w]
+                    self.b[w]=self.b[w]-gamma*prev_b[w]
                 
                 self.xBatch =self.x[i:i+self.batch]
                 self.yBatch  = self.y[i:i+self.batch]
@@ -44,6 +46,10 @@ class NAG(NeuralNetwork):
                 self.b=vb
                     
                 #Update parameter and return new v_w and v_b
+                for w in range(totalLayer):
+                    self.W[w]=self.W[w]-gamma*prev_w[w]
+                    self.b[w]=self.b[w]-gamma*prev_b[w]
+                
                 prev_w,prev_b=self.updateParam( gamma,prev_w,prev_b)
                
                 #verify loss after each epoch
