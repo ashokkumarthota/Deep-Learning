@@ -1,22 +1,22 @@
 import numpy as np
 import sys
+sys.path.append('../fashnMnist/')
 from fashnMnist.NeuralNetwork import NeuralNetwork
 
 class RmsProp(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,decay_rate=0.01 , epochs =100,batch=100,HiddenLayerNuron=[60,10],activation='tanh'
+    def __init__(self, x, y, lr = .5,decay_rate=0.01 , epochs =100,batch=100,HiddenLayerNuron=[60,10],activation='tanh',beta=.9
                  ):
                 
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,beta=beta)
                 
                 
           
-    def train(self,beta=0.9,batch=0):
+    def train(self):
         
         #initialize all parameters
-        if batch!=0:
-            self.batch=batch
+        
         print('Starting RMSProp')
         print('.....................................')
         v_w,v_b  = self.DW, self.DB
@@ -37,7 +37,7 @@ class RmsProp(NeuralNetwork):
             prevvw=v_w
             prevvb=v_b
             #Update parameter and return new v_w and v_b
-            v_w,v_b=self.updateParamWithrms( beta,v_w,v_b)
+            v_w,v_b=self.updateParam( beta,v_w,v_b)
                
             #verify loss after each epoch
             self.xBatch = self.x
@@ -71,7 +71,7 @@ class RmsProp(NeuralNetwork):
         print('Completed')
         print('.....................................')
         
-    def updateParamWithrms(self, beta,v_w,v_b): 
+    def updateParam(self, beta,v_w,v_b): 
         totalLayer=len(self.HiddenLayerNuron)
         
         betaDash=(1-beta)

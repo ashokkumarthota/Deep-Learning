@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
-class Adam(NeuralNetwork):
+class NAdam(NeuralNetwork):
     def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0):
           
                 # invoking the __init__ of the parent class 
@@ -9,26 +9,23 @@ class Adam(NeuralNetwork):
                 
                 
           
-    def train(self,beta1=0.9,beta2=0.99,batch=0):
-        #initialize all parameters
-        if batch!=0:
-            self.batch=batch
-        print('Starting Adam')
+    def train(self):
+        
+        print('Starting NAdam')
         print('.....................................')
         m_w,v_w,m_b, v_b  = self.DW, self.DW, self.DB, self.DB
         prevacc=0
         for epoch in range(self.epochs):
-            #store history
-            prevBeta1=beta1
-            prevBeta2=beta2
             #control momentum
             beta1=self.momentumUpdate(epoch+1)
             beta2=self.momentumUpdate(epoch+1)
-            
+            prevBeta1=beta1
+            prevBeta2=beta2
+          
             
             #reset all derivatives
             self.resetWeightDerivative()
-            
+            self.shuffle()
             for i in range(0, self.x.shape[0], self.batch):
                 
                 self.xBatch =self.x[i:i+self.batch]
@@ -47,7 +44,7 @@ class Adam(NeuralNetwork):
             prev_v_b =v_b
             prevW=self.W
             prevB=self.b
-            m_w,v_w,m_b, v_b =self.updateParamWithAdam( m_w,v_w,m_b, v_b ,beta1,beta2,(epoch+1))
+            m_w,v_w,m_b, v_b =self.updateParam( m_w,v_w,m_b, v_b ,beta1,beta2,(epoch+1))
            
             #verify loss after each epoch
             self.xBatch = self.x
@@ -84,7 +81,7 @@ class Adam(NeuralNetwork):
         print('.....................................')
    
         
-    def updateParamWithAdam(self, m_w,v_w,m_b, v_b ,beta1,beta2,epoch): 
+    def updateParam(self, m_w,v_w,m_b, v_b ,beta1,beta2,epoch): 
         totalLayer=len(self.HiddenLayerNuron)
         
         beta1Hat=1.0-(beta1**epoch)
@@ -124,6 +121,18 @@ class Adam(NeuralNetwork):
             mw= mw/beta1Hat
             mb= mb/beta1Hat
             
+            nagw1= (beta1*mw)
+            nagw2= beta1Dash *(self.DW[i])
+            nagw2=nagw2/beta1Hat
+            nagw= nagw1+nagw2
+            
+            nagb1= (beta1*mb)
+            nagb2= beta1Dash *(self.DB[i])
+            nagb2=nagb2/beta1Hat
+            nagb= nagb1+nagb2
+            
+            
+            
             newvw.append(vw)
             newvb.append(vb)
             newmw.append(mw)
@@ -133,8 +142,8 @@ class Adam(NeuralNetwork):
             vb= np.sqrt(vb)+eps
             
            
-            self.W[i] = self.W[i] - (self.lr/vw)*(mw)
-            self.b[i] = self.b[i] - (self.lr/vb)* (mb)
+            self.W[i] = self.W[i] - (self.lr/vw)*(nagw)
+            self.b[i] = self.b[i] - (self.lr/vb)* (nagb)
          
         return newmw,newvw,newmb,newvb
    

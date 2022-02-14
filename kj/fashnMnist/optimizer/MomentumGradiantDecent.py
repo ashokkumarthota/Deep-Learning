@@ -34,7 +34,7 @@ class MomentumGradiantDecent(NeuralNetwork):
             prevvw=v_w
             prevvb=v_b    
             #Update parameter and return new v_w and v_b
-            v_w, v_b=self.updateParamForMomentumGradientDescent(v_w, v_b,epoch)
+            v_w, v_b=self.updateParam(v_w, v_b,epoch)
                    
             #verify loss after each epoch
             self.xBatch = self.x
@@ -59,7 +59,7 @@ class MomentumGradiantDecent(NeuralNetwork):
         print('Completed')
         print('.....................................')
         
-    def updateParamForMomentumGradientDescent(self,v_w,v_b,epoch): 
+    def updateParam(self,v_w,v_b,epoch): 
         totalLayer=len(self.HiddenLayerNuron)
         gamma=self.getGamma(epoch)
         for i in range(totalLayer):

@@ -1,16 +1,14 @@
 import numpy as np
-import pandas as pd
-import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
-from fashnMnist.MomentumGradiantDecent import MomentumGradiantDecent
-from fashnMnist.RmsProp import RmsProp
-from fashnMnist.NAG import NAG
-from fashnMnist.Adam import Adam
-from fashnMnist.NAdam import NAdam
-import matplotlib.pyplot as plt
+from fashnMnist.optimizer.MomentumGradiantDecent import MomentumGradiantDecent
+from fashnMnist.optimizer.RmsProp import RmsProp
+from fashnMnist.optimizer.NAG import NAG
+from fashnMnist.optimizer.Adam import Adam
+from fashnMnist.optimizer.NAdam import NAdam
+
 
 class FashnMnist:
-    def __init__(self,x, y,lr = .5,epochs =100,batch=500,HiddenLayerNuron=[60,10],decay_rate=0,activation='tanh',optimizer='GradiantDecent',beta1=0.9,beta2=0.99):
+    def __init__(self,x, y,lr = .5,epochs =100,batch=500,HiddenLayerNuron=[60,10],decay_rate=0,activation='tanh',optimizer='GradiantDecent',beta1=0.9,beta2=0.99,gamma=0.9,beta=.9):
                 self.network=None
  
                 self.y=y
@@ -26,7 +24,7 @@ class FashnMnist:
                     
          
                 if(self.optimizer=='nag'):
-                     self.network=NAG( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation)
+                     self.network=NAG( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,gamma=gamma)
                 
                 if(self.optimizer=='adam'):
                     self.network=Adam( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,beta1=beta1,beta2=beta2)
@@ -38,25 +36,9 @@ class FashnMnist:
                      self.network=RmsProp( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate)
                     
                 
-    def train(self,b=0.1,eta=0.1,gamma=.9,batch=0,beta1=0.9,beta2=0.99,beta=0.9):
+    def train(self): 
+        self.network.train()
        
-        if (self.optimizer=='gd' or self.optimizer=='sgd'):
-            self.network.train(batch)
-            
-        if (self.optimizer=='mgd'):
-            self.network.train()
-        
-        if(self.optimizer=='nag'):
-            self.network.train(batch)
-        
-        if(self.optimizer=='rms'):
-            self.network.train(beta)
-                
-        if(self.optimizer=='adam'):
-                    self.network.train(beta1=beta1,beta2=beta2,batch=batch)
-                
-        if(self.optimizer=='nadam'):
-                    self.network.train(beta1=beta1,beta2=beta2,batch=batch)
     def predict(self,x,y):
         prediction=self.network.predict(x)
         prediction=y-prediction

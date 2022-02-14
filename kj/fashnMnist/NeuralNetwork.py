@@ -1,21 +1,23 @@
 import numpy as np
+import numpy as np
+from fashnMnist.Initializers import Initializers
+from fashnMnist.Activations import Activations
 import math
 class NeuralNetwork:
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=0,HiddenLayerNuron=[60,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9):
-       
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[60,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='xavier'):
         
+        self.initializer=initializer
         self.HiddenLayerNuron=HiddenLayerNuron
-        
-        
         self.x = x
         self.y = y
-        self.decay_rate=decay_rate
-        #define batch size
-        self.batch=32
-        if (batch!=0):
-            self.batch=batch
-            
-            
+        self.xBatch=x
+        self.yBatch=y 
+        
+        #initialize weights
+        self.init_weights()
+        
+        #initialize hyper parameters
+        self.decay_rate=decay_rate        
         self.beta1=beta1
         self.beta2=beta2
         self.epochs = epochs
@@ -25,10 +27,9 @@ class NeuralNetwork:
         self.loss = []
         self.acc = []
         self.batch=batch
-        self.init_weights()
-        self.xBatch=x
-        self.yBatch=y
-         
+       
+        self.gamma=gamma
+        self.beta=beta
       
     def stepDecay(self,currstep,epoch):
         # exponential decay
@@ -43,24 +44,17 @@ class NeuralNetwork:
         self.b=[]
         self.DW=[]
         self.DB=[]
+        init=Initializers(self.initializer)
         bounds=(-0.1, 0.1)
         prevInput=self.x.shape[1]
         for i in self.HiddenLayerNuron:
-            sd = np.sqrt(6.0 / (prevInput + i))
-            lower_bnd, upper_bnd =-sd,sd# 0,sd
-            distw = np.random.uniform(low=lower_bnd, high=upper_bnd, size=(prevInput ,i))
-            distb = np.random.uniform(low=lower_bnd, high=upper_bnd, size=(i))
-          
-            self.W.append(distw)
+           
+            self.W.append(init.initialize(prevInput ,i))
+            self.b.append(init.initialize(i))
             self.DW.append(np.zeros((prevInput ,i)))
+            self.DB.append(np.zeros(i))
             prevInput=i
-            self.b.append(distb)
-            x=np.zeros(i)
-            self.DB.append(x)
-         
-   
-
-
+    
     def resetWeightDerivative(self):
         self.DW=[]
         self.DB=[]
@@ -72,63 +66,30 @@ class NeuralNetwork:
             prevInput=i
             
        
-    
-            
-    def sig(self,x):
-          return  1/(1+np.exp(-x))
-
-    # Sigmoidal derivative
-    def dsig(self,x):
-          return self.sig(x) * (1- self.sig(x))
-        
-        
-    def reLU(self, x):
-        #return np.maximum(0,x)
-        return  np.where(x < 0, 0, x)
-    
-    def dReLU(self,x):
-        return 1 * (x > 0) 
-
-    
-    
-    
-    def tanh(self, x):
-        return np.tanh(x)
-    
-    def dtanh(self,x):
-        tanh_x = self.tanh(x)
-        return (1 - np.square(tanh_x))
-    
-    
-    
-    
-    def softmax(self, z):   
-        z=np.exp(z)
-        tmp=np.sum(z, axis = 1) 
-        for i in range(z.shape[0]):       
-            z[i]=z[i]/tmp[i]
-        return z
-    
+   
     def feedforward(self):
         self.z=[]
         self.a=[]
         self.yHat=[]
         totalLayer=len(self.HiddenLayerNuron)
+        activation=Activations()
+       
         x=self.xBatch
         for i in range(totalLayer):
             self.z.append(x.dot(self.W[i]) + self.b[i]) 
-            if(self.activation=='sigmoid'):
-                self.a.append(self.sig(self.z[i]))
+            if (i==totalLayer-1):
+                 self.a.append(self.z[i])
             else:
-                if(self.activation=='relu'):
-                    self.a.append(self.reLU(self.z[i]))
+                if(self.activation=='sigmoid'):
+                    self.a.append(activation.sig(self.z[i]))
+                elif(self.activation=='relu'):
+                    self.a.append(activation.reLU(self.z[i]))
+                elif(self.activation=='tanh'):
+                    self.a.append(activation.tanh(self.z[i]))
                 else:
-                    if(self.activation=='tanh'):
-                        self.a.append(self.tanh(self.z[i]))
-                    else:
-                        self.a.append(self.z[i])
+                    self.a.append(self.z[i])
             x=self.a[i]  
-        self.yHat=self.softmax(x)
+        self.yHat=activation.softmax(x)
         
         return self.yHat
         
@@ -142,6 +103,7 @@ class NeuralNetwork:
    
         prevLayerDW=dcost
         i=totalLayer-1
+        activation=Activations()
         while( i>=0):
             
            
@@ -161,14 +123,14 @@ class NeuralNetwork:
                 prevLayerDW=np.dot(prevLayerDW,self.W[i].T)
                  
                 if(self.activation=='sigmoid'):
-                    tmp=prevLayerDW*self.dsig(self.z[i-1])
+                    tmp=prevLayerDW*activation.dsig(self.z[i-1])
                     prevLayerDW=tmp
                 if(self.activation=='relu'):
-                    tmp=prevLayerDW*self.dReLU(self.z[i-1])
+                    tmp=prevLayerDW*activation.dReLU(self.z[i-1])
                     prevLayerDW=tmp
                     
                 if(self.activation=='tanh'):
-                    tmp=prevLayerDW*self.dtanh(self.z[i-1])
+                    tmp=prevLayerDW*activation.dtanh(self.z[i-1])
                     prevLayerDW=tmp
                  
 
@@ -215,12 +177,11 @@ class NeuralNetwork:
         loss=np.mean(self.error)
         return loss
     
-    def train(self,batch=0):
+    def train(self):
         print('.....................................')
         print('Starting Gradient Descent..')
         print('.....................................')
-        if batch!=0:
-            self.batch=batch
+        
         for epoch in range(self.epochs):
             
             self.resetWeightDerivative()
@@ -250,8 +211,8 @@ class NeuralNetwork:
         print('.....................................')
         
     def printDetails(self,epoch,totalepoch,acc,loss):
-        if((epoch+1)%50==0):
-            print('\r steps={}/{} , Accuraacy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5))) 
+        if((epoch+1)%20==0):
+            print('\r steps={}/{} , Accuracy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5))) 
         else:
              print('\r steps={}/{} , Accuraacy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5)),end =" ") 
        

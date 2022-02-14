@@ -1,23 +1,23 @@
 import numpy as np
 import sys
+sys.path.append('../fashnMnist/')
 from fashnMnist.NeuralNetwork import NeuralNetwork
 
 class NAG(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=100,HiddenLayerNuron=[60,10],activation='sigmoid',
-                 beta=0.9):
+    def __init__(self, x, y, lr = .5,  epochs =100,HiddenLayerNuron=[60,10],activation='sigmoid',
+                 beta=0.9,gamma=0.8,batch=32):
                 
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,gamma=gamma)
                 
                 
           
-    def train(self,gamma=0.8,batch=0):
+    def train(self):
         totalLayer=len(self.HiddenLayerNuron)
         
         #initialize all parameters
-        if batch!=0:
-            self.batch=batch
+       
         print('Starting NAG')
         print('.....................................')
         prev_w,prev_b  = self.DW, self.DB
@@ -44,7 +44,7 @@ class NAG(NeuralNetwork):
             self.b=vb
                     
             #Update parameter and return new v_w and v_b
-            prev_w,prev_b=self.updateParamWithNAG( gamma,prev_w,prev_b)
+            prev_w,prev_b=self.updateParam( gamma,prev_w,prev_b)
                
             #verify loss after each epoch
             self.xBatch = self.x
@@ -62,7 +62,7 @@ class NAG(NeuralNetwork):
         print('Completed')
         print('.....................................')
         
-    def updateParamWithNAG(self, gamma,prev_w,prev_b): 
+    def updateParam(self, gamma,prev_w,prev_b): 
         totalLayer=len(self.HiddenLayerNuron)
         
        
