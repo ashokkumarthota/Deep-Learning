@@ -2,11 +2,11 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class MomentumGradiantDecent(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh',decay_rate=0.01,initializer='he'
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh',decay_rate=0.01 
                 ):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,initializer=initializer )
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate )
                 
                 
           
@@ -29,12 +29,12 @@ class MomentumGradiantDecent(NeuralNetwork):
                 self.yBatch  = self.y[i:i+self.batch]
                 pred=self.feedforward()
                 self.backprop()
-                prevW=self.W
-                prevB=self.b
-                prevvw=v_w
-                prevvb=v_b    
-                #Update parameter and return new v_w and v_b
-                v_w, v_b=self.updateParam(v_w, v_b,epoch)
+            prevW=self.W
+            prevB=self.b
+            prevvw=v_w
+            prevvb=v_b    
+            #Update parameter and return new v_w and v_b
+            v_w, v_b=self.updateParam(v_w, v_b,epoch)
                    
             #verify loss after each epoch
             self.xBatch = self.x

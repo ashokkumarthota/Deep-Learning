@@ -4,7 +4,7 @@ from fashnMnist.Initializers import Initializers
 from fashnMnist.Activations import Activations
 import math
 class NeuralNetwork:
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[60,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='xavier'):
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[60,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0.0001):
         
         self.initializer=initializer
         self.HiddenLayerNuron=HiddenLayerNuron
@@ -30,7 +30,7 @@ class NeuralNetwork:
        
         self.gamma=gamma
         self.beta=beta
-      
+        self.weight_decay=weight_decay
     def stepDecay(self,currstep,epoch):
         # exponential decay
         alpha = currstep / epoch
@@ -72,7 +72,7 @@ class NeuralNetwork:
         self.a=[]
         self.yHat=[]
         totalLayer=len(self.HiddenLayerNuron)
-        activation=Activations()
+        activation=Activations(self.activation)
        
         x=self.xBatch
         for i in range(totalLayer):
@@ -80,14 +80,8 @@ class NeuralNetwork:
             if (i==totalLayer-1):
                  self.a.append(self.z[i])
             else:
-                if(self.activation=='sigmoid'):
-                    self.a.append(activation.sig(self.z[i]))
-                elif(self.activation=='relu'):
-                    self.a.append(activation.reLU(self.z[i]))
-                elif(self.activation=='tanh'):
-                    self.a.append(activation.tanh(self.z[i]))
-                else:
-                    self.a.append(self.z[i])
+                self.a.append(activation.applyActivation(self.z[i]))
+                
             x=self.a[i]  
         self.yHat=activation.softmax(x)
         
@@ -103,7 +97,7 @@ class NeuralNetwork:
    
         prevLayerDW=dcost
         i=totalLayer-1
-        activation=Activations()
+        activation=Activations(self.activation)
         while( i>=0):
             
            
@@ -115,30 +109,19 @@ class NeuralNetwork:
             else:
                 x=self.a[i-1]
             t=np.dot(x.T,prevLayerDW)
-           
+            
             self.DB[i]+= np.sum(prevLayerDW,axis = 0)
             self.DW[i]+=t
             
             if (i>0):
                 prevLayerDW=np.dot(prevLayerDW,self.W[i].T)
-                 
-                if(self.activation=='sigmoid'):
-                    tmp=prevLayerDW*activation.dsig(self.z[i-1])
-                    prevLayerDW=tmp
-                if(self.activation=='relu'):
-                    tmp=prevLayerDW*activation.dReLU(self.z[i-1])
-                    prevLayerDW=tmp
-                    
-                if(self.activation=='tanh'):
-                    tmp=prevLayerDW*activation.dtanh(self.z[i-1])
-                    prevLayerDW=tmp
-                 
+                prevLayerDW=prevLayerDW*activation.applyActivationDeriv(self.z[i-1])
+                
+               
 
             i-=1
         
-        #self.DW.reverse()
-        #self.DB.reverse()
-        
+       
     def updateParam(self): 
         totalLayer=len(self.HiddenLayerNuron)
         
@@ -183,7 +166,7 @@ class NeuralNetwork:
         print('.....................................')
         
         for epoch in range(self.epochs):
-            
+            self.shuffle()
             self.resetWeightDerivative()
             
             for i in range(0, self.x.shape[0], self.batch):
@@ -191,8 +174,8 @@ class NeuralNetwork:
                 self.yBatch  = self.y[i:i+self.batch]
                 pred=self.feedforward()
                 self.backprop()
-            
-            #update parameters
+
+                #update parameters
             self.updateParam()    
             
             
