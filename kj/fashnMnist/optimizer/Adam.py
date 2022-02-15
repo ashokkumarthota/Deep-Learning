@@ -2,10 +2,10 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class Adam(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he'):
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate)
                 
                 
           
@@ -26,7 +26,8 @@ class Adam(NeuralNetwork):
             
             #reset all derivatives
             
-            
+            self.shuffle()
+            failediteration=0
             for i in range(0, self.x.shape[0], self.batch):
                 self.resetWeightDerivative()
                 self.xBatch =self.x[i:i+self.batch]
@@ -66,8 +67,8 @@ class Adam(NeuralNetwork):
                     self.W=prevW
                     self.b=prevB
                     acc=prevacc
-
-                    self.lr= self.lr*(1-self.decay_rate)
+                    failediteration+=1
+                    self.lr= self.stepDecay(failediteration)
 
                 else:
 

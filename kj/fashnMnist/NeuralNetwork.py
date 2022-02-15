@@ -4,7 +4,7 @@ from fashnMnist.Initializers import Initializers
 from fashnMnist.Activations import Activations
 import math
 class NeuralNetwork:
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[60,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0.0001):
+    def __init__(self, x, y, lr = .01,  epochs =100,batch=32,HiddenLayerNuron=[32,64,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0.0001,dropout_rate=0):
         
         self.initializer=initializer
         self.HiddenLayerNuron=HiddenLayerNuron
@@ -27,14 +27,13 @@ class NeuralNetwork:
         self.loss = []
         self.acc = []
         self.batch=batch
-       
+        self.dropout_rate=dropout_rate
         self.gamma=gamma
         self.beta=beta
         self.weight_decay=weight_decay
-    def stepDecay(self,currstep,epoch):
-        # exponential decay
-        alpha = currstep / epoch
-        return self.lr * math.exp(-self.decay_rate * alpha)
+    def stepDecay(self,epoch):
+      
+        return self.lr * (1.0/(1+self.decay_rate * epoch))
     def momentumUpdate(self,t,maxm=.999):
         x=np.log(np.floor(t/250)+1)/np.log(2)
         x=1-2**(-1-x)
@@ -71,6 +70,7 @@ class NeuralNetwork:
         self.z=[]
         self.a=[]
         self.yHat=[]
+        self.D=[]
         totalLayer=len(self.HiddenLayerNuron)
         activation=Activations(self.activation)
        
@@ -81,8 +81,20 @@ class NeuralNetwork:
                  self.a.append(self.z[i])
             else:
                 self.a.append(activation.applyActivation(self.z[i]))
-                
-            x=self.a[i]  
+                if(self.dropout_rate!=0):
+                    dropRate=(1-self.dropout_rate)
+                    d= np.random.rand(self.a[i].shape[0], self.a[i].shape[1])
+                    d=d<dropRate
+                    self.D.append(d)
+                    self.a[i]=self.a[i]*d
+                    self.a[i]=self.a[i]/dropRate
+                    
+                    
+            x=self.a[i]
+                    
+            
+            
+              
         self.yHat=activation.softmax(x)
         
         return self.yHat
@@ -108,6 +120,11 @@ class NeuralNetwork:
                 x=self.xBatch
             else:
                 x=self.a[i-1]
+                if(self.dropout_rate!=0):
+                    x=x* self.D[i-1]
+                    x=x/(1-self.dropout_rate)
+                    
+                    
             t=np.dot(x.T,prevLayerDW)
             
             self.DB[i]+= np.sum(prevLayerDW,axis = 0)

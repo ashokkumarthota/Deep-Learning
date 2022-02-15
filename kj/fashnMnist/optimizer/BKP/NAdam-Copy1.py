@@ -2,10 +2,10 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class NAdam(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0):
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he'):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer)
                 
                 
           
@@ -15,7 +15,6 @@ class NAdam(NeuralNetwork):
         print('.....................................')
         m_w,v_w,m_b, v_b  = self.DW, self.DW, self.DB, self.DB
         prevacc=0
-        failediteration=0
         for epoch in range(self.epochs):
             #control momentum
             beta1=self.momentumUpdate(epoch+1)
@@ -25,10 +24,10 @@ class NAdam(NeuralNetwork):
           
             
             #reset all derivatives
-          
+            self.resetWeightDerivative()
             self.shuffle()
             for i in range(0, self.x.shape[0], self.batch):
-                self.resetWeightDerivative()
+                
                 self.xBatch =self.x[i:i+self.batch]
                 self.yBatch  = self.y[i:i+self.batch]
                 
@@ -38,41 +37,40 @@ class NAdam(NeuralNetwork):
                 self.backprop()
                 
            
-                #save history
-                prev_m_w= m_w
-                prev_v_w=v_w
-                prev_m_b=m_b
-                prev_v_b =v_b
-                prevW=self.W
-                prevB=self.b
-                m_w,v_w,m_b, v_b =self.updateParam( m_w,v_w,m_b, v_b ,beta1,beta2,(epoch+1))
+            #save history
+            prev_m_w= m_w
+            prev_v_w=v_w
+            prev_m_b=m_b
+            prev_v_b =v_b
+            prevW=self.W
+            prevB=self.b
+            m_w,v_w,m_b, v_b =self.updateParam( m_w,v_w,m_b, v_b ,beta1,beta2,(epoch+1))
            
-                #verify loss after each epoch
-                self.xBatch = self.x
-                self.yBatch  =self.y
-                pred=self.feedforward()
-                acc=self.accurecy(pred,self.y)
-                loss=self.calculateLoss() 
+            #verify loss after each epoch
+            self.xBatch = self.x
+            self.yBatch  =self.y
+            pred=self.feedforward()
+            acc=self.accurecy(pred,self.y)
+            loss=self.calculateLoss() 
             
-                if(acc<prevacc):
+            if(acc<prevacc):
                 #reset to old histry as accurecy dropping
-                    beta1=prevBeta1
-                    beta2=prevBeta2
-                    m_w=prev_m_w
-                    v_w=prev_v_w
-                    m_b=prev_m_b
-                    v_b=prev_v_b 
+                beta1=prevBeta1
+                beta2=prevBeta2
+                m_w=prev_m_w
+                v_w=prev_v_w
+                m_b=prev_m_b
+                v_b=prev_v_b 
             
-                    self.W=prevW
-                    self.b=prevB
-                    acc=prevacc
+                self.W=prevW
+                self.b=prevB
+                acc=prevacc
                 
-                    failediteration+=1
-                    self.lr= self.stepDecay(failediteration)
+                self.lr= self.lr*(1-self.decay_rate)
                  
-                else:
+            else:
                 
-                    prevacc =acc
+                prevacc =acc
                  
            
             #print details       
