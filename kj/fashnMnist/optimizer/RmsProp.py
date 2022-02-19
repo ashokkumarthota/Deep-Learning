@@ -4,12 +4,12 @@ sys.path.append('../fashnMnist/')
 from fashnMnist.NeuralNetwork import NeuralNetwork
 
 class RmsProp(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,decay_rate=0.01 , epochs =100,batch=100,HiddenLayerNuron=[60,10],activation='tanh',beta=.9,initializer='he',dropout_rate=0
+    def __init__(self, x, y, lr = .5,decay_rate=0.01 , epochs =100,batch=100,HiddenLayerNuron=[60,10],activation='tanh',beta=.9999,initializer='he',dropout_rate=0,weight_decay=0
                  ):
                 
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,beta=beta,initializer=initializer,dropout_rate=dropout_rate)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,beta=beta,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay)
                 
                 
           
@@ -23,10 +23,12 @@ class RmsProp(NeuralNetwork):
         prevacc=0
         Timenochange=0
         for epoch in range(self.epochs):
+            self.lr=self.controlLearningRate(epoch,self.epochs)
             
             self.resetWeightDerivative()
            
-            beta=self.momentumUpdate(epoch+1)
+            beta=self.momentumUpdateV2(epoch+1,self.epochs)
+            
             self.resetWeightDerivative()
             for i in range(0, self.x.shape[0], self.batch):
                 self.xBatch =self.x[i:i+self.batch]

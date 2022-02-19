@@ -5,11 +5,11 @@ from fashnMnist.NeuralNetwork import NeuralNetwork
 
 class NAG(NeuralNetwork):
     def __init__(self, x, y, lr = .5,  epochs =100,HiddenLayerNuron=[60,10],activation='sigmoid',
-                 beta=0.9,gamma=0.8,batch=32,initializer='he'):
+                 beta=0.9,gamma=0.8,batch=32,initializer='he',weight_decay=0,dropout_rate=0):
                 
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,gamma=gamma)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,gamma=gamma,weight_decay=weight_decay,dropout_rate=dropout_rate)
                 
                 
           
@@ -26,11 +26,14 @@ class NAG(NeuralNetwork):
             
             
             
-            
+            self.lr=self.controlLearningRate(epoch,self.epochs)
                 
             for i in range(0, self.x.shape[0], int(self.batch)):
                     #update weight and bias
                 self.resetWeightDerivative()
+                
+                
+                
                 vw=self.W
                 vb=self.b
                 for w in range(totalLayer):

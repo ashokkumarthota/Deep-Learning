@@ -2,11 +2,11 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class MomentumGradiantDecent(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh',decay_rate=0.01,initializer='he'
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh',decay_rate=0.01,initializer='he',weight_decay=0,dropout_rate=0
                 ):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,initializer=initializer )
+                NeuralNetwork.__init__(self, x, y, lr = lr,dropout_rate=dropout_rate,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay )
                 
                 
           
@@ -17,6 +17,7 @@ class MomentumGradiantDecent(NeuralNetwork):
         print('.....................................')
         v_w, v_b  = self.DW, self.DB
         prevacc=0
+        prevloss=999999
         for epoch in range(self.epochs):
             #reset weight derivatives and shuffle data
             self.resetWeightDerivative()
@@ -42,16 +43,17 @@ class MomentumGradiantDecent(NeuralNetwork):
             pred=self.feedforward()
             acc=self.accurecy(pred,self.y)
             loss=self.calculateLoss()
-            if(acc<prevacc):
-                self.lr= self.lr*(1-self.decay_rate)
+            if(loss>prevloss):
+                self.lr= self.stepDecay(epoch)
                 self.W=prevW
                 self.b=prevB
                 acc=prevacc
                 v_w=prevvw
                 v_b=prevvb
-              
+                loss=prevloss
             else:
                 prevacc =acc
+                prevloss=loss
             
             #print details 
             self.printDetails(epoch,self.epochs,acc,loss)

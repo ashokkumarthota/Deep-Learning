@@ -4,7 +4,7 @@ from fashnMnist.Initializers import Initializers
 from fashnMnist.Activations import Activations
 import math
 class NeuralNetwork:
-    def __init__(self, x, y, lr = .01,  epochs =100,batch=32,HiddenLayerNuron=[32,64,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0.0001,dropout_rate=0):
+    def __init__(self, x, y, lr = .01,  epochs =100,batch=32,HiddenLayerNuron=[32,64,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0,dropout_rate=0):
         
         self.initializer=initializer
         self.HiddenLayerNuron=HiddenLayerNuron
@@ -31,11 +31,25 @@ class NeuralNetwork:
         self.gamma=gamma
         self.beta=beta
         self.weight_decay=weight_decay
+        
+        
     def stepDecay(self,epoch):
       
         return self.lr * (1.0/(1+self.decay_rate * epoch))
+    
+    
+    def controlLearningRate(self,epoch,totEpoch):
+        if epoch < totEpoch/2:
+              return self.lr
+        else:
+             return max(0.00001,(self.lr * np.exp(-0.2)))
     def momentumUpdate(self,t,maxm=.999):
         x=np.log(np.floor(t/250)+1)/np.log(2)
+        x=1-2**(-1-x)
+        return min(x,maxm)
+    
+    def momentumUpdateV2(self,t,epoch,maxm=.999):
+        x=np.log(np.floor(t/epoch)+1)/np.log(2)
         x=1-2**(-1-x)
         return min(x,maxm)
     def init_weights(self):
@@ -76,7 +90,7 @@ class NeuralNetwork:
        
         x=self.xBatch
         for i in range(totalLayer):
-            self.z.append(x.dot(self.W[i]) + self.b[i]) 
+            self.z.append(x @(self.W[i]) - self.b[i]) 
             if (i==totalLayer-1):
                  self.a.append(self.z[i])
             else:
@@ -127,7 +141,15 @@ class NeuralNetwork:
                     
             t=np.dot(x.T,prevLayerDW)
             
-            self.DB[i]+= np.sum(prevLayerDW,axis = 0)
+            dl2=0
+            if(self.weight_decay!=0 and i==totalLayer-1):
+                
+                dl2=(np.sum(self.W[totalLayer-1])/self.x.shape[0])
+                dl2=self.weight_decay*dl2
+                t=t+dl2
+            
+            
+            self.DB[i]+=(-1)* np.sum(prevLayerDW,axis = 0)
             self.DW[i]+=t
             
             if (i>0):
@@ -162,6 +184,7 @@ class NeuralNetwork:
         pred=np.argmax(pred, axis=1)
         return pred
     
+    
     def shuffle(self):
         idx = [i for i in range(self.x.shape[0])]
         np.random.shuffle(idx)
@@ -172,10 +195,23 @@ class NeuralNetwork:
     def calculateLoss(self):
         self.loss=[]
         self.error = (-1)*np.log(self.yHat)*self.yBatch
-        
+       
         self.error=np.sum(self.error,axis=1)
         loss=np.mean(self.error)
+        if(self.weight_decay!=0):
+            totalLayer=len(self.HiddenLayerNuron)
+            l2=(np.sum(self.W[totalLayer-1]**2)/(2*self.x.shape[0]))
+            loss=loss+self.weight_decay*l2
         return loss
+    
+    def getResults(self,x,y):
+        self.xBatch = x
+        self.yBatch  =y
+        pred=self.feedforward()
+        acc=self.accurecy(pred,self.yBatch)
+        loss=self.calculateLoss()
+        pred=np.argmax(pred, axis=1)
+        return pred,acc,loss
     
     def train(self):
         print('.....................................')

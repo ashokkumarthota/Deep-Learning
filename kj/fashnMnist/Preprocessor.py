@@ -2,9 +2,10 @@ import numpy as np
 from keras.datasets import fashion_mnist
 
 class Preprocessor:
-    def __init__(self):
+    def __init__(self,normalization=False):
         self.mean=[]
         self.sd=[]
+        self.normalization=normalization
         
    
     def Process_Fashon_mnistDataSet(self,x_train,y_train,x_test,y_test):  
@@ -13,8 +14,10 @@ class Preprocessor:
         x_train=x_train.reshape((x_train.shape[0],x_train.shape[1]*x_train.shape[2]))
         x_test=x_test.reshape((x_test.shape[0],x_test.shape[1]*x_test.shape[2]))
         y_train=self.oneHotEncoding(y_train) 
-        x_train=self.fitStandarization(x_train)
-        x_test=self.applyStandarization(x_test)
+        y_test=self.oneHotEncoding(y_test) 
+        if(self.normalization):
+            x_train=self.fitStandarization(x_train)
+            x_test=self.applyStandarization(x_test)
         return x_train,y_train,x_test,y_test
         
     def oneHotEncoding(self,y_train):

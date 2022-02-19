@@ -2,7 +2,7 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class Adam(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0):
+    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0,weight_decay=0):
           
                 # invoking the __init__ of the parent class 
                 NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate)
@@ -16,65 +16,44 @@ class Adam(NeuralNetwork):
         print('.....................................')
         m_w,v_w,m_b, v_b  = self.DW, self.DW, self.DB, self.DB
         prevacc=0
+        prevloss=999999
+        step=1
+        beta1=.9
+        beta2=0.9
+        chunkSize=self.xBatch.shape[0]
+        chunkSize=max(int(chunkSize/100),1)
+        processedDataSize=0
         for epoch in range(self.epochs):
            
-            #control momentum
-            beta1=self.momentumUpdate(epoch+1)
-            beta2=self.momentumUpdate(epoch+1)
-            prevBeta1=beta1
-            prevBeta2=beta2
-            
-            #reset all derivatives
-            
             self.shuffle()
-            failediteration=0
+           
+            #don't want Stochastic adam as it takes crazy amount of time
             for i in range(0, self.x.shape[0], self.batch):
                 self.resetWeightDerivative()
+                #don't want Stochastic adam as it takes crazy amount of time
+                beta1=self.momentumUpdate(step)
+                beta2=self.momentumUpdate(step)
                 self.xBatch =self.x[i:i+self.batch]
                 self.yBatch  = self.y[i:i+self.batch]
-                
                 
                 pred=self.feedforward()
                
                 self.backprop()
                 
-           
-                #save history
-                prev_m_w= m_w
-                prev_v_w=v_w
-                prev_m_b=m_b
-                prev_v_b =v_b
-                prevW=self.W
-                prevB=self.b
-                m_w,v_w,m_b, v_b =self.updateParam( m_w,v_w,m_b, v_b ,beta1,beta2,(epoch+1))
+                step+=1
+                processedDataSize=processedDataSize+self.batch 
+                m_w,v_w,m_b, v_b =self.updateParam( m_w,v_w,m_b, v_b ,beta1,beta2,(step))
+               
+            
+            #verify loss after each epoch
+            self.xBatch = self.x
+            self.yBatch  =self.y
+            pred=self.feedforward()
+            acc=self.accurecy(pred,self.y)
+            step+=1
+            loss=self.calculateLoss() 
+            processedDataSize=0
 
-                #verify loss after each epoch
-                self.xBatch = self.x
-                self.yBatch  =self.y
-                pred=self.feedforward()
-                acc=self.accurecy(pred,self.y)
-                loss=self.calculateLoss() 
-
-                if(acc<prevacc):
-                    #reset to old histry as accurecy dropping
-                    beta1=prevBeta1
-                    beta2=prevBeta2
-                    m_w=prev_m_w
-                    v_w=prev_v_w
-                    m_b=prev_m_b
-                    v_b=prev_v_b 
-
-                    self.W=prevW
-                    self.b=prevB
-                    acc=prevacc
-                    failediteration+=1
-                    self.lr= self.stepDecay(failediteration)
-
-                else:
-
-                    prevacc =acc
-                 
-           
             #print details       
             self.printDetails(epoch,self.epochs,acc,loss)
            
