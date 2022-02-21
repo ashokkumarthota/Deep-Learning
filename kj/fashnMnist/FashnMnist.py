@@ -28,7 +28,14 @@ class FashnMnist:
                  ,layer2_size=0
                  ,layer3_size=0
                  ,layer4_size=0
-                 ,layer5_size=0):
+                 ,layer5_size=0
+                 ,runlog=True
+                 ,lossfunction='cross'
+                 ,wandb=None
+                 ,wandbLog=False,
+                 x_val=None
+                 ,y_val=None):
+                
                 self.network=None
  
                 self.y=y
@@ -52,26 +59,26 @@ class FashnMnist:
                 else:
                     hiddenLayers=   HiddenLayerNuron 
                 if (self.optimizer=='gd'):
-                    self.network=NeuralNetwork( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay)
+                    self.network=NeuralNetwork( x=x, y=y, lr = lr, wandb=wandb,wandbLog=wandbLog,x_val=x_val,y_val=y_val, epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                     
                 if (self.optimizer=='sgd'):
-                    self.network=NeuralNetwork( x=x, y=y, lr = lr,  epochs =epochs,batch=1,HiddenLayerNuron=hiddenLayers,activation=activation,initializer=initializer,weight_decay=weight_decay)
+                    self.network=NeuralNetwork( x=x, y=y, lr = lr, wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val,  epochs =epochs,batch=1,HiddenLayerNuron=hiddenLayers,activation=activation,initializer=initializer,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                     
                 if (self.optimizer=='mgd'):
-                    self.network=MomentumGradiantDecent( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,dropout_rate=dropout_rate,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay)
+                    self.network=MomentumGradiantDecent( x=x, y=y, lr = lr, wandb=wandb,wandbLog=wandbLog,x_val=x_val,y_val=y_val,   epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,dropout_rate=dropout_rate,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                     
          
                 if(self.optimizer=='nag'):
-                     self.network=NAG( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,gamma=gamma,initializer=initializer,weight_decay=weight_decay,dropout_rate=dropout_rate)
+                     self.network=NAG( x=x, y=y, lr = lr, wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,gamma=gamma,initializer=initializer,weight_decay=weight_decay,dropout_rate=dropout_rate,runlog=runlog,lossfunction=lossfunction)
                 
                 if(self.optimizer=='adam'):
-                    self.network=Adam( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,beta1=beta1,beta2=beta2,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay)
+                    self.network=Adam( x=x, y=y, lr = lr,  wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val, epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,beta1=beta1,beta2=beta2,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                     
                 if(self.optimizer=='nadam'):
-                    self.network=NAdam( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,beta1=beta1,beta2=beta2,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay)
+                    self.network=NAdam( x=x, y=y, lr = lr,  wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val, epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,beta1=beta1,beta2=beta2,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                 
                 if(self.optimizer=='rms'):
-                     self.network=RmsProp( x=x, y=y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay)
+                     self.network=RmsProp( x=x, y=y, lr = lr,  wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val, epochs =epochs,batch=batch,HiddenLayerNuron=hiddenLayers,activation=activation,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                     
                 
     def train(self): 
@@ -85,7 +92,10 @@ class FashnMnist:
         print('Test accuracy='+str(accurecy*100))
         return prediction
     
-    
+    def TrainingStatistics(self):
+        return self.network.runAccurecy,self.network.runLoss
+        
+        
     def GetRunResult(self,x,y):
         prediction,acc,loss=self.network.getResults(x,y)
         return  prediction,acc,loss

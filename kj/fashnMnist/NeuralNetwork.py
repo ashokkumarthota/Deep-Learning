@@ -4,33 +4,43 @@ from fashnMnist.Initializers import Initializers
 from fashnMnist.Activations import Activations
 import math
 class NeuralNetwork:
-    def __init__(self, x, y, lr = .01,  epochs =100,batch=32,HiddenLayerNuron=[32,64,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0,dropout_rate=0):
-        
+    def __init__(self, x, y, lr = .01,x_val=None,y_val=None, wandb=None,wandbLog=False, epochs =100,batch=32,HiddenLayerNuron=[32,64,10],activation='tanh' ,decay_rate=0,beta1=0.9,beta2=0.9,beta=0.9,gamma=0.9,initializer='he',weight_decay=0,dropout_rate=0,runlog=True,lossfunction='cross'):
+        self.runAccurecy=[]
+        self.runLoss=[]
+        self.lossfunction=lossfunction
         self.initializer=initializer
+        self.runlog=runlog
+        
+
+        #wandblo
+        self.wandbLog=wandbLog
+        self.wandb=wandb
+        self.x_val=x_val
+        self.y_val=y_val
+        #setup neural network
         self.HiddenLayerNuron=HiddenLayerNuron
         self.x = x
         self.y = y
         self.xBatch=x
-        self.yBatch=y 
-        
-        #initialize weights
+        self.yBatch=y       
         self.init_weights()
-        
-        #initialize hyper parameters
-        self.decay_rate=decay_rate        
-        self.beta1=beta1
-        self.beta2=beta2
         self.epochs = epochs
         self.fixedlr = lr
         self.lr = lr
-        self.activation=activation
-        self.loss = []
-        self.acc = []
+        self.decay_rate=decay_rate  
+        self.weight_decay=weight_decay
         self.batch=batch
         self.dropout_rate=dropout_rate
+        self.activation=activation
+       
+        #other initialisation
+       
+        self.beta1=beta1
+        self.beta2=beta2
+        self.loss = []
+        self.acc = []      
         self.gamma=gamma
         self.beta=beta
-        self.weight_decay=weight_decay
         
         
     def stepDecay(self,epoch):
@@ -43,6 +53,7 @@ class NeuralNetwork:
               return self.lr
         else:
              return max(0.00001,(self.lr * np.exp(-0.2)))
+            
     def momentumUpdate(self,t,maxm=.999):
         x=np.log(np.floor(t/250)+1)/np.log(2)
         x=1-2**(-1-x)
@@ -87,7 +98,7 @@ class NeuralNetwork:
         self.D=[]
         totalLayer=len(self.HiddenLayerNuron)
         activation=Activations(self.activation)
-       
+        
         x=self.xBatch
         for i in range(totalLayer):
             self.z.append(x @(self.W[i]) - self.b[i]) 
@@ -108,19 +119,22 @@ class NeuralNetwork:
                     
             
             
-              
-        self.yHat=activation.softmax(x)
+        if(self.lossfunction=='mse'):
+            self.yHat=activation.applyActivation(x)
+        else: 
+            self.yHat=activation.softmax(x)
         
         return self.yHat
         
         
     def backprop(self):
         totalLayer=len(self.HiddenLayerNuron)
-         
+        activation=Activations(self.activation) 
         self.error = self.yHat - self.yBatch
         dcost = (1/self.x.shape[0])*self.error
+        if(self.lossfunction=='mse'):
+            dcost=dcost*activation.applyActivationDeriv(self.z[totalLayer-1])
         
-   
         prevLayerDW=dcost
         i=totalLayer-1
         activation=Activations(self.activation)
@@ -194,14 +208,25 @@ class NeuralNetwork:
         
     def calculateLoss(self):
         self.loss=[]
-        self.error = (-1)*np.log(self.yHat)*self.yBatch
        
-        self.error=np.sum(self.error,axis=1)
-        loss=np.mean(self.error)
+        loss=0
+        if(self.lossfunction=='cross'):
+            self.error = (-1)*np.log(self.yHat)*self.yBatch
+            self.error=np.sum(self.error,axis=1)
+            loss=np.mean(self.error)
+           
+                
+        if(self.lossfunction=='mse'):
+                self.error = (self.yHat-self.yBatch)
+                self.error=self.error**2
+                loss==np.sum(self.error,axis=0) 
+                loss==np.sum(self.error)  
+                loss=loss/2
+            
         if(self.weight_decay!=0):
-            totalLayer=len(self.HiddenLayerNuron)
-            l2=(np.sum(self.W[totalLayer-1]**2)/(2*self.x.shape[0]))
-            loss=loss+self.weight_decay*l2
+                totalLayer=len(self.HiddenLayerNuron)
+                l2=(np.sum(self.W[totalLayer-1]**2)/(2*self.x.shape[0]))
+                loss=loss+self.weight_decay*l2    
         return loss
     
     def getResults(self,x,y):
@@ -214,9 +239,10 @@ class NeuralNetwork:
         return pred,acc,loss
     
     def train(self):
-        print('.....................................')
-        print('Starting Gradient Descent..')
-        print('.....................................')
+        if(self.runlog):
+            print('.....................................')
+            print('Starting Gradient Descent..')
+            print('.....................................')
         
         for epoch in range(self.epochs):
             self.shuffle()
@@ -238,18 +264,25 @@ class NeuralNetwork:
             pred=self.feedforward()
             acc=self.accurecy(pred,self.y)
             loss=self.calculateLoss()
-            
-            
+           
+            self.runAccurecy.append(acc)
+            self.runLoss.append(loss)
             #print details 
             self.printDetails(epoch,self.epochs,acc,loss)
-        print()
-        print('Completed') 
-        print('.....................................')
+        if(self.runlog):
+            print()
+            print('Completed') 
+            print('.....................................')
         
     def printDetails(self,epoch,totalepoch,acc,loss):
-        if((epoch+1)%20==0):
-            print('\r steps={}/{} , Accuracy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5))) 
-        else:
-             print('\r steps={}/{} , Accuraacy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5)),end =" ") 
+        if(self.runlog ):
+            if((epoch+1)%20==0):
+                print('\r steps={}/{} , Accuracy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5))) 
+            else:
+                 print('\r steps={}/{} , Accuraacy ={} ,Loss={}'.format((epoch+1),totalepoch,round(acc, 2) , round(loss,5)),end =" ") 
        
+        if(self.wandbLog): 
               
+             _,accv,lossv=self.getResults(self.x_val,self.y_val)  
+             
+             self.wandb.log({"val_accuracy": accv ,"val_loss": lossv ,  "loss": loss,"epochs":epoch+1, "accuracy":  acc})

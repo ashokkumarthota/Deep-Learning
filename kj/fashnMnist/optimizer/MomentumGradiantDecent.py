@@ -2,19 +2,19 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class MomentumGradiantDecent(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh',decay_rate=0.01,initializer='he',weight_decay=0,dropout_rate=0
+    def __init__(self, x, y, lr = .5,  wandb=None,wandbLog=False,x_val=None,y_val=None,epochs =100,batch=500,HiddenLayerNuron=[60,10],activation='tanh',decay_rate=0.01,initializer='he',weight_decay=0,dropout_rate=0,runlog=True,lossfunction='cross'
                 ):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,dropout_rate=dropout_rate,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay )
+                NeuralNetwork.__init__(self, x, y,wandb=wandb,wandbLog=wandbLog,x_val=x_val,y_val=y_val, lr = lr,dropout_rate=dropout_rate,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,decay_rate=decay_rate,initializer=initializer,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction )
                 
                 
           
     def train(self):
         #initialize all parameters
-        
-        print('Starting Momentum Gradient Descent')
-        print('.....................................')
+        if(self.runlog):
+            print('Starting Momentum Gradient Descent')
+            print('.....................................')
         v_w, v_b  = self.DW, self.DB
         prevacc=0
         prevloss=999999
@@ -57,9 +57,12 @@ class MomentumGradiantDecent(NeuralNetwork):
             
             #print details 
             self.printDetails(epoch,self.epochs,acc,loss)
-        print()
-        print('Completed')
-        print('.....................................')
+            self.runAccurecy.append(acc)
+            self.runLoss.append(loss)
+        if(self.runlog):
+            print()
+            print('Completed')
+            print('.....................................')
         
     def updateParam(self,v_w,v_b,epoch): 
         totalLayer=len(self.HiddenLayerNuron)

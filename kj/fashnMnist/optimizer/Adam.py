@@ -2,18 +2,18 @@ import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
 class Adam(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0,weight_decay=0):
+    def __init__(self, x, y, lr = .5,wandb=None,wandbLog=False, x_val=None,y_val=None, epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0,weight_decay=0,runlog=True,lossfunction='cross'):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val, epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate,runlog=runlog,lossfunction=lossfunction)
                 
                 
           
     def train(self):
         #initialize all parameters
-        
-        print('Starting Adam')
-        print('.....................................')
+        if(self.runlog):
+            print('Starting Adam')
+            print('.....................................')
         m_w,v_w,m_b, v_b  = self.DW, self.DW, self.DB, self.DB
         prevacc=0
         prevloss=999999
@@ -30,7 +30,7 @@ class Adam(NeuralNetwork):
             #don't want Stochastic adam as it takes crazy amount of time
             for i in range(0, self.x.shape[0], self.batch):
                 self.resetWeightDerivative()
-                #don't want Stochastic adam as it takes crazy amount of time
+                #using mimentum update as it gives good accurecy instead any constant value
                 beta1=self.momentumUpdate(step)
                 beta2=self.momentumUpdate(step)
                 self.xBatch =self.x[i:i+self.batch]
@@ -56,10 +56,12 @@ class Adam(NeuralNetwork):
 
             #print details       
             self.printDetails(epoch,self.epochs,acc,loss)
-           
+            self.runAccurecy.append(acc)
+            self.runLoss.append(loss)
         print()
-        print('Completed')
-        print('.....................................')
+        if(self.runlog):
+            print('Completed')
+            print('.....................................')
    
         
     def updateParam(self, m_w,v_w,m_b, v_b ,beta1,beta2,epoch): 
