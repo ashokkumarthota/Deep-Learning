@@ -1,7 +1,7 @@
 
 # Questions
 
-| Syntax      | Description |
+| Questions      | Links |
 | ----------- | ----------- |
 | Question 1     | [Question 1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS1.ipynb)       |
 | Question 2,3,4,5,6    | [Ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)       , [Sweep1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun1.py)     ,  [Sweep2](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun2.py) [Sweep3](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun3.py)            |
