@@ -6,7 +6,7 @@
 | Question 1     | [Question 1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS1.ipynb)       |
 | Question 2,3,4,5,6    | [Ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)       , [Sweep1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun1.py)     ,  [Sweep2](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun2.py) [Sweep3](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun3.py)            |
 | Question 7    | [Question 7](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS7-confusionMatrix.ipynb)       |
-|Question 8| [ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/Q8_CrossVsMse.ipynb)  ,[sweep](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS8_SweepRun.py)|
+|Question 8| [ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/Q8_CrossVsMse.ipynb)  ,[sweep](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS8_SweepRun.py)|
 
 
 
