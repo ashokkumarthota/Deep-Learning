@@ -13,8 +13,7 @@
  
  
 
- [Question 2](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,
-5,6_Optimizers.ipynb)
+ 
 # Packages
 
  **[fashnMnist/NeuralNetwork.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/NeuralNetwork.py)**
