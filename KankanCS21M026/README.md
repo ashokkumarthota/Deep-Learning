@@ -37,6 +37,11 @@ This classs used to define  various weight initializers .Mostly called from Neur
 		
 Please note Basic gradiant decent and stochastic gradient descent thechnique implemented in **/fashnMnist/NeuralNetwork.py**
 
+## Preprocess Data
+```
+preprocess=Preprocessor(normalization=True)
+x_trainNorm, y_trainNorm, x_testNorm, y_testNorm=preprocess.Process_Fashon_mnistDataSet(x_train, y_train, x_test, y_test)
+```
 ## Neural Network
 ```
 FashnMnist(
