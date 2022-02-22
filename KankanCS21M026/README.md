@@ -4,9 +4,9 @@
 | Syntax      | Description |
 | ----------- | ----------- |
 | Question 1     | [Question 1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS1.ipynb)       |
-| Question 2,3,4,5,6    | [Ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)       , [Sweep1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4,5,6_sweepRun1.py)     ,  [Sweep2](https://github.com/ashokkumarthota/QS4,5,6_sweepRun2.py)  , [Sweep3](https://github.com/ashokkumarthota/QS4,5,6_sweepRun3.py)            |
+| Question 2,3,4,5,6    | [Ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)       , [Sweep1](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun1.py)     ,  [Sweep2](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun2.py) [Sweep3](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS4%2C5%2C6_sweepRun3.py)            |
 | Question 7    | [Question 7](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS7-confusionMatrix.ipynb)       |
-|Question 8| [ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/Q8_CrossVsMse.ipynb)  ,[sweep](https://github.com/ashokkumarthota/Deep-Learning/blob/main/Q8_CrossVsMse.ipynb)|
+|Question 8| [ipython](https://github.com/ashokkumarthota/Deep-Learning/blob/main/Q8_CrossVsMse.ipynb)  ,[sweep](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS8_SweepRun.py)|
 
 
 
@@ -17,28 +17,24 @@
 5,6_Optimizers.ipynb)
 # Packages
 
- **fashnMnist/NeuralNetwork.py**
+ **[fashnMnist/NeuralNetwork.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/NeuralNetwork.py)**
 - Implementation of neural network.It has all important common functions for forward propagation, back propagation
 which are used by all other optimizers
-
-**fashnMnist/FashnMnist.py**
+**[fashnMnist/FashnMnist.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/FashnMnist.py)**
 - This class call NeuralNetwork or other optimizers based on input provided by used 
-		
-**fashnMnist/Initializers.py**
+**[fashnMnist/Initializers.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/Initializers.py)**		
 -This classs used to define  various weight initializers .Mostly called from NeuralNetwork
-		
-**fashnMnist/Preprocessor.py**
+**[fashnMnist/Preprocessor.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/Preprocessor.py)**		
 - This classs used to preprocess input data like apply one hot encoding,normalization etc
-		
-**fashnMnist/Activations.py**
+**[fashnMnist/Activations.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/Activations.py)**		
 - This classs used to define  various Activation functions and there derivatives.Mostly called from NeuralNetwork.
 		
 **All optimizers:**	
-- fashnMnist/optimizer/Adam.py
-- fashnMnist/optimizer/NAG.py
-- fashnMnist/optimizer/NAdam.py
-- fashnMnist/optimizer/RMSProp.py
-- fashnMnist/optimizer/MomentumGradiantDecent.py
+- [fashnMnist/optimizer/Adam.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/optimizer/Adam.py)
+- [fashnMnist/optimizer/NAG.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/optimizer/NAG.pyy)
+- [fashnMnist/optimizer/NAdam.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/optimizer/NAdam.py)
+- [fashnMnist/optimizer/RMSProp.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/optimizer/RMSProp.py)
+- [fashnMnist/optimizer/MomentumGradiantDecent.py](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/fashnMnist/optimizer/MomentumGradiantDecent.py)
 		
 Please note Basic gradiant decent and stochastic gradient descent thechnique implemented in **/fashnMnist/NeuralNetwork.py**
 
