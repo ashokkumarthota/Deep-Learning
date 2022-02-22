@@ -27,7 +27,7 @@ class RmsProp(NeuralNetwork):
             
             self.resetWeightDerivative()
            
-            beta=self.momentumUpdateV2(epoch+1,self.epochs)
+            beta=self.momentumUpdate(epoch+1)
             
             self.resetWeightDerivative()
             for i in range(0, self.x.shape[0], self.batch):

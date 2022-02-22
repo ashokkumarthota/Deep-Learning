@@ -48,11 +48,7 @@ class NAG(NeuralNetwork):
                 self.W=vw
                 self.b=vb
                     
-                #Update parameter and return new v_w and v_b
-                for w in range(totalLayer):
-                    self.W[w]=self.W[w]-gamma*prev_w[w]
-                    self.b[w]=self.b[w]-gamma*prev_b[w]
-                
+             
                 prev_w,prev_b=self.updateParam( gamma,prev_w,prev_b)
                
                 #verify loss after each epoch

@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import sys
 import matplotlib.pyplot as plt
-sys.path.append('./fashnMnist/')
+sys.path.append('../fashnMnist/')
 from fashnMnist.FashnMnist import FashnMnist
 from fashnMnist.Preprocessor import Preprocessor
 import wandb
@@ -25,39 +25,24 @@ np.random.seed(20)
 from sklearn.model_selection import train_test_split    
 from keras.datasets import fashion_mnist
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
-preprocess=Preprocessor(normalization=True)
-x_trainNorm, y_trainNorm, x_testNorm, y_testNorm=preprocess.Process_Fashon_mnistDataSet(x_train, y_train, x_test, y_test)
-X_training, x_crossVal, y_training, y_crossval = train_test_split(x_trainNorm, y_trainNorm, test_size=0.1, random_state=20)
-print(y_training.shape)
-print(y_crossval.shape)
 # #Load Mnist fafashion dataset using keras
 
 # In[34]:
 sweep_config = {"name": "sweep", "method": "grid"}
 sweep_config["metric"] = {"name": "accuracy", "goal": "maximize"}
-"""
+
 parameters_dict = {
-                "epochs": {"values": [10]},     
-                "optimizer": {"values": ["rms","adam","nadam"]}, \
-                "batch": {"values": [32,100]}, \
-                "lr":{"values":[0.01,0.001]}, \
-                "layer1_size":{"values": [32,64,128]}, \
-                "layer2_size":{"values": [32,64]}, \ 
-                "activation" :{"values": ["tanh","relu"]} \ 
-                }
-                """
-parameters_dict = {
-                "epochs": {"values": [5]},     
+                "epochs": {"values": [5,10]},
+                "Normalization":{"values":[True,False]},\
                 "optimizer": {"values": ["nadam"]}, \
                 "batch": {"values": [100]}, \
-                "lr":{"values":[0.015,0.002]}, \
-                "epoch":{"values":[5,10]}, \
-                "layer1_size":{"values": [128,256]}, \
-                "layer2_size":{"values": [64,128]} ,\
-                "dropout_rate":{"values": [0,0.6]} ,\
-                "activation" :{"values": ["tanh","relu"]} 
-            
+                "lr":{"values":[0.001,.003]}, \
+                "layer1_size":{"values": [64,128,256]}, \
+                "layer2_size":{"values": [64,128]},\
+                "activation" :{"values": ["relu"]}, \
+                "weight_decay":{"values": [.5,1.5]}\
                 }
+                
 sweep_config["parameters"] = parameters_dict
 
 
@@ -69,17 +54,24 @@ def train_model(config = sweep_config):
         
         #wandb.run.name = "op_{}_act_{}_lr_{}_layer1_{}_layer2_{}".format(config.optimizer,config.activation ,config.lr,config.layer1_size,config.layer2_size)
         
-        wandb.run.name = "op_{}_lr_{}_layer1_{}_layer2_{}_act_{}_do_{}".format(config.optimizer ,config.lr,config.layer1_size,config.layer2_size,config.activation,config.dropout_rate)
+        wandb.run.name = "op_{}_lr_{}_layer1_{}_layer2_{}_act_{}_Norm_{}".format(config.optimizer ,config.lr,config.layer1_size,config.layer2_size,config.activation,config.Normalization)
+        preprocess=Preprocessor(normalization=config.Normalization)
+        x_trainNorm, y_trainNorm, x_testNorm, y_testNorm=preprocess.Process_Fashon_mnistDataSet(x_train, y_train, x_test, y_test)
+        X_training, x_crossVal, y_training, y_crossval = train_test_split(x_trainNorm, y_trainNorm, test_size=0.1, random_state=20)
+        print(y_training.shape)
+        print(y_crossval.shape)
         model=FashnMnist(x=X_training,y=y_training,  lr=config.lr,  epochs =config.epochs, batch=config.batch,                 
                    layer1_size=config.layer1_size,\
                    layer2_size=config.layer2_size,\
+             
                    optimizer=config.optimizer,\
                    initializer="he",\
                    activation=config.activation,\
-                   weight_decay=.5,\
+                   weight_decay=config.weight_decay,\
                    dropout_rate=config.dropout_rate,\
+                   
                    wandbLog=True,\
-                   wandb=wandb ,\
+                   wandb=wandb, \
                    x_val=x_crossVal,\
                    y_val=y_crossval\
                    )

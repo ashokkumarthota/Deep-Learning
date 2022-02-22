@@ -137,7 +137,7 @@ class NeuralNetwork:
         
         prevLayerDW=dcost
         i=totalLayer-1
-        activation=Activations(self.activation)
+        
         while( i>=0):
             
            
