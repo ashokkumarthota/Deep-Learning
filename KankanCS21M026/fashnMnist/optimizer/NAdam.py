@@ -1,18 +1,17 @@
 import numpy as np
 import sys
 from fashnMnist.NeuralNetwork import NeuralNetwork
-class Adam(NeuralNetwork):
-    def __init__(self, x, y, lr = .5,wandb=None,wandbLog=False, x_val=None,y_val=None, epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0,weight_decay=0,runlog=True,lossfunction='cross'):
+class NAdam(NeuralNetwork):
+    def __init__(self, x, y, lr = .5,wandb=None,wandbLog=False,x_val=None,y_val=None,  epochs =100,batch=32,HiddenLayerNuron=[32,10],activation='tanh',beta1=0.9,beta2=0.99,decay_rate=0,initializer='he',dropout_rate=0,weight_decay=0,runlog=True,lossfunction='cross'):
           
                 # invoking the __init__ of the parent class 
-                NeuralNetwork.__init__(self, x, y, lr = lr,  wandb=wandb,wandbLog=wandbLog, x_val=x_val,y_val=y_val, epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate,runlog=runlog,lossfunction=lossfunction)
+                NeuralNetwork.__init__(self, x, y, lr = lr,  wandb=wandb,wandbLog=wandbLog,x_val=x_val,y_val=y_val,  epochs =epochs,batch=batch,HiddenLayerNuron=HiddenLayerNuron,activation=activation,beta1=beta1,beta2=beta2,decay_rate=decay_rate,initializer=initializer,dropout_rate=dropout_rate,weight_decay=weight_decay,runlog=runlog,lossfunction=lossfunction)
                 
                 
           
     def train(self):
-        #initialize all parameters
         if(self.runlog):
-            print('Starting Adam')
+            print('Starting NAdam')
             print('.....................................')
         m_w,v_w,m_b, v_b  = self.DW, self.DW, self.DB, self.DB
         prevacc=0
@@ -30,7 +29,7 @@ class Adam(NeuralNetwork):
             #don't want Stochastic adam as it takes crazy amount of time
             for i in range(0, self.x.shape[0], self.batch):
                 self.resetWeightDerivative()
-                #using mimentum update as it gives good accurecy instead any constant value
+                 #using mimentum update as it gives good accurecy instead any constant value
                 beta1=self.momentumUpdate(step)
                 beta2=self.momentumUpdate(step)
                 self.xBatch =self.x[i:i+self.batch]
@@ -58,15 +57,15 @@ class Adam(NeuralNetwork):
             self.printDetails(epoch,self.epochs,acc,loss)
             self.runAccurecy.append(acc)
             self.runLoss.append(loss)
-        print()
         if(self.runlog):
+            print()
             print('Completed')
             print('.....................................')
    
         
     def updateParam(self, m_w,v_w,m_b, v_b ,beta1,beta2,epoch): 
         totalLayer=len(self.HiddenLayerNuron)
-        
+     
         beta1Hat=1.0-(beta1**epoch)
         beta2Hat=1.0-(beta2**epoch)
         
@@ -79,30 +78,21 @@ class Adam(NeuralNetwork):
         newmw=[]
         newmb=[]
         for i in range(totalLayer):
-            vw1= np.multiply(v_w[i],beta2)
-            vw2=np.square(self.DW[i])
-            vw2= np.multiply(vw2 ,beta2Dash)
-            vw3=np.add(vw1,vw2)
+            vw= np.multiply(v_w[i],beta2)+ np.multiply(np.square(self.DW[i]) ,beta2Dash)      
+            vb=np.multiply(v_b[i],beta2)+np.multiply(np.square(self.DB[i]) ,beta2Dash)
+            mw= np.multiply(m_w[i],beta1)+np.multiply(self.DW[i] ,beta1Dash)   
+            mb= np.multiply(m_b[i],beta1)+ np.multiply(self.DB[i] ,beta1Dash)
            
-            vb1=np.multiply(v_b[i],beta2)
-            vb2=np.square(self.DB[i])
-            vb2=np.multiply(vb2 ,beta2Dash)
-            
-            vb3=np.add(vb1,vb2)
-           
-
-            mw1= np.multiply(m_w[i],beta1)
-            mw2= np.multiply(self.DW[i] ,beta1Dash)
-            mw=np.add(mw1,mw2)
-            mb1= np.multiply(m_b[i],beta1)
-            mb2= np.multiply(self.DB[i] ,beta1Dash)
-            mb=np.add(mb1,mb2)
 
              #bias correction
-            vw= vw3/beta2Hat
-            vb= vb3/beta2Hat 
+            vw= vw/beta2Hat
+            vb= vb/beta2Hat 
             mw= mw/beta1Hat
             mb= mb/beta1Hat
+            
+            nagw= (beta1*mw)+ beta1Dash *(self.DW[i])/beta1Hat        
+            nagb= (beta1*mb)+ beta1Dash *(self.DB[i])/beta1Hat
+          
             
             newvw.append(vw)
             newvb.append(vb)
@@ -113,8 +103,8 @@ class Adam(NeuralNetwork):
             vb= np.sqrt(vb)+eps
             
            
-            self.W[i] = self.W[i] - (self.lr/vw)*(mw)
-            self.b[i] = self.b[i] - (self.lr/vb)* (mb)
+            self.W[i] = self.W[i] - (self.lr/vw)*(nagw)
+            self.b[i] = self.b[i] - (self.lr/vb)* (nagb)
          
         return newmw,newvw,newmb,newvb
    
