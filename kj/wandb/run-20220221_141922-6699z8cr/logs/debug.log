@@ -1,0 +1,208 @@
+2022-02-21 14:19:22,625 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Loading settings from C:\Users\cseka\.config\wandb\settings
+2022-02-21 14:19:22,626 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Loading settings from wandb\settings
+2022-02-21 14:19:22,626 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Loading settings from environment variables: {'notebook_name': 'sweepTest', 'project': 'cs6910_assignment1', 'entity': 'kankan-jana', 'root_dir': 'C:\\Users\\cseka\\OneDrive\\Documents\\deeplearn\\Deep-Learning\\kj', 'run_id': '6699z8cr', 'sweep_param_path': 'C:\\Users\\cseka\\OneDrive\\Documents\\deeplearn\\Deep-Learning\\kj\\wandb\\sweep-bfhpehvm\\config-6699z8cr.yaml', 'sweep_id': 'bfhpehvm'}
+2022-02-21 14:19:22,628 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Inferring run settings from compute environment: {'program_relpath': 'kj\\sweep_Run4.py', 'program': 'sweep_Run4.py'}
+2022-02-21 14:19:22,628 INFO    Thread-74 :16416 [wandb_init.py:_log_setup():386] Logging user logs to C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_141922-6699z8cr\logs\debug.log
+2022-02-21 14:19:22,629 INFO    Thread-74 :16416 [wandb_init.py:_log_setup():387] Logging internal logs to C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_141922-6699z8cr\logs\debug-internal.log
+2022-02-21 14:19:22,629 INFO    Thread-74 :16416 [wandb_init.py:init():420] calling init triggers
+2022-02-21 14:19:22,630 INFO    Thread-74 :16416 [wandb_init.py:init():427] wandb.init called with sweep_config: {'activation': 'tanh', 'batch': 100, 'dropout_rate': 0, 'epoch': 5, 'epochs': 5, 'layer1_size': 256, 'layer2_size': 128, 'lr': 0.015, 'optimizer': 'nadam'}
+config: {'name': 'sweep', 'method': 'grid', 'metric': {'name': 'accuracy', 'goal': 'maximize'}, 'parameters': {'epochs': {'values': [5]}, 'optimizer': {'values': ['nadam']}, 'batch': {'values': [100]}, 'lr': {'values': [0.015, 0.002]}, 'epoch': {'values': [5, 10]}, 'layer1_size': {'values': [128, 256]}, 'layer2_size': {'values': [64, 128]}, 'dropout_rate': {'values': [0, 0.6]}, 'activation': {'values': ['tanh', 'relu']}}}
+2022-02-21 14:19:22,630 INFO    Thread-74 :16416 [wandb_init.py:init():471] starting backend
+2022-02-21 14:19:22,631 INFO    Thread-74 :16416 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2022-02-21 14:19:22,635 INFO    Thread-74 :16416 [backend.py:ensure_launched():219] starting backend process...
+2022-02-21 14:19:22,795 INFO    Thread-74 :16416 [backend.py:ensure_launched():225] started backend process with pid: 8372
+2022-02-21 14:19:22,797 INFO    Thread-74 :16416 [wandb_init.py:init():480] backend started and connected
+2022-02-21 14:19:22,798 INFO    Thread-74 :16416 [wandb_run.py:_config_callback():966] config_cb None None {'activation': 'tanh', 'batch': 100, 'dropout_rate': 0, 'epoch': 5, 'epochs': 5, 'layer1_size': 256, 'layer2_size': 128, 'lr': 0.015, 'optimizer': 'nadam'}
+2022-02-21 14:19:22,801 INFO    Thread-74 :16416 [wandb_init.py:init():550] updated telemetry
+2022-02-21 14:19:22,874 INFO    Thread-74 :16416 [wandb_init.py:init():581] communicating current version
+2022-02-21 14:19:27,351 INFO    Thread-74 :16416 [wandb_init.py:init():586] got version response 
+2022-02-21 14:19:27,352 INFO    Thread-74 :16416 [wandb_init.py:init():596] communicating run to backend with 30 second timeout
+2022-02-21 14:19:27,892 INFO    Thread-74 :16416 [wandb_init.py:init():624] starting run threads in backend
+2022-02-21 14:19:32,972 INFO    Thread-74 :16416 [wandb_run.py:_console_start():1827] atexit reg
+2022-02-21 14:19:32,978 INFO    Thread-74 :16416 [wandb_run.py:_redirect():1701] redirect: SettingsConsole.WRAP
+2022-02-21 14:19:32,982 INFO    Thread-74 :16416 [wandb_run.py:_redirect():1738] Wrapping output streams.
+2022-02-21 14:19:32,988 INFO    Thread-74 :16416 [wandb_run.py:_redirect():1762] Redirects installed.
+2022-02-21 14:19:32,990 INFO    Thread-74 :16416 [wandb_init.py:init():651] run started, returning control to user process
+2022-02-21 14:19:33,020 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Loading settings from C:\Users\cseka\.config\wandb\settings
+2022-02-21 14:19:33,021 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Loading settings from wandb\settings
+2022-02-21 14:19:33,023 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Loading settings from environment variables: {'notebook_name': 'sweepTest', 'project': 'cs6910_assignment1', 'entity': 'kankan-jana', 'root_dir': 'C:\\Users\\cseka\\OneDrive\\Documents\\deeplearn\\Deep-Learning\\kj', 'run_id': '6699z8cr', 'sweep_param_path': 'C:\\Users\\cseka\\OneDrive\\Documents\\deeplearn\\Deep-Learning\\kj\\wandb\\sweep-bfhpehvm\\config-6699z8cr.yaml', 'sweep_id': 'bfhpehvm'}
+2022-02-21 14:19:33,026 INFO    Thread-74 :16416 [wandb_setup.py:_flush():75] Inferring run settings from compute environment: {'program_relpath': 'kj\\sweep_Run4.py', 'program': 'sweep_Run4.py'}
+2022-02-21 14:19:33,030 INFO    Thread-74 :16416 [wandb_init.py:_log_setup():386] Logging user logs to C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_141933-6699z8cr\logs\debug.log
+2022-02-21 14:19:33,033 INFO    Thread-74 :16416 [wandb_init.py:_log_setup():387] Logging internal logs to C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_141933-6699z8cr\logs\debug-internal.log
+2022-02-21 14:19:33,036 INFO    Thread-74 :16416 [wandb_init.py:init():420] calling init triggers
+2022-02-21 14:19:33,038 INFO    Thread-74 :16416 [wandb_init.py:init():427] wandb.init called with sweep_config: {'activation': 'tanh', 'batch': 100, 'dropout_rate': 0, 'epoch': 5, 'epochs': 5, 'layer1_size': 256, 'layer2_size': 128, 'lr': 0.015, 'optimizer': 'nadam'}
+config: {}
+2022-02-21 14:19:33,040 INFO    Thread-74 :16416 [wandb_init.py:init():466] wandb.init() called when a run is still active
+2022-02-21 14:21:56,777 INFO    Thread-74 :16416 [wandb_run.py:finish():1468] finishing run kankan-jana/cs6910_assignment1/6699z8cr
+2022-02-21 14:21:56,780 INFO    Thread-74 :16416 [wandb_run.py:_atexit_cleanup():1797] got exitcode: 0
+2022-02-21 14:21:56,787 INFO    Thread-74 :16416 [wandb_run.py:_restore():1769] restore
+2022-02-21 14:21:57,387 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 2
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 16447
+}
+
+2022-02-21 14:21:57,633 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 2
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 16447
+}
+
+2022-02-21 14:21:58,302 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 2
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 16447
+}
+
+2022-02-21 14:21:58,974 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,095 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,247 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,369 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,477 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,601 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,758 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 16447
+  total_bytes: 23441
+}
+
+2022-02-21 14:21:59,893 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:00,016 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:00,140 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:00,264 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:00,389 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:00,509 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:01,573 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+
+2022-02-21 14:22:02,567 INFO    Thread-74 :16416 [wandb_run.py:_wait_for_finish():1929] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 6
+  other_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 23441
+  total_bytes: 23441
+}
+local_info {
+}
+
+2022-02-21 14:22:03,965 INFO    Thread-74 :16416 [wandb_run.py:_append_history():2144] rendering history
+2022-02-21 14:22:03,966 INFO    Thread-74 :16416 [wandb_run.py:_append_summary():2102] rendering summary
+2022-02-21 14:22:03,966 INFO    Thread-74 :16416 [wandb_run.py:_append_files():2194] logging synced files

@@ -1,0 +1,213 @@
+2022-02-21 14:46:56,143 INFO    MainThread:7448 [internal.py:wandb_internal():92] W&B internal server running at pid: 7448, started at: 2022-02-21 14:46:56.143191
+2022-02-21 14:46:56,147 INFO    WriterThread:7448 [datastore.py:open_for_write():77] open: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\run-bnjtzcuv.wandb
+2022-02-21 14:46:56,149 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: check_version
+2022-02-21 14:46:56,154 DEBUG   SenderThread:7448 [sender.py:send():235] send: header
+2022-02-21 14:46:56,154 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: check_version
+2022-02-21 14:46:57,348 DEBUG   SenderThread:7448 [sender.py:send():235] send: run
+2022-02-21 14:46:57,863 INFO    SenderThread:7448 [dir_watcher.py:__init__():169] watching files in: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files
+2022-02-21 14:46:57,863 INFO    SenderThread:7448 [sender.py:_start_run_threads():812] run started: bnjtzcuv with start time 1645435013
+2022-02-21 14:46:57,864 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:46:57,865 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:46:57,865 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: run_start
+2022-02-21 14:46:58,874 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:47:02,968 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:47:03,238 DEBUG   HandlerThread:7448 [meta.py:__init__():36] meta init
+2022-02-21 14:47:03,239 DEBUG   HandlerThread:7448 [meta.py:__init__():50] meta init done
+2022-02-21 14:47:03,239 DEBUG   HandlerThread:7448 [meta.py:probe():210] probe
+2022-02-21 14:47:03,685 DEBUG   HandlerThread:7448 [meta.py:_setup_git():200] setup git
+2022-02-21 14:47:03,988 DEBUG   HandlerThread:7448 [meta.py:_setup_git():207] setup git done
+2022-02-21 14:47:03,989 DEBUG   HandlerThread:7448 [meta.py:_save_code():88] save code
+2022-02-21 14:47:04,128 DEBUG   HandlerThread:7448 [meta.py:_save_code():109] save code done
+2022-02-21 14:47:04,128 DEBUG   HandlerThread:7448 [meta.py:_save_patches():126] save patches
+2022-02-21 14:47:04,996 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:47:04,997 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\code\kj\sweep_Run4.py
+2022-02-21 14:47:04,999 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\diff.patch
+2022-02-21 14:47:05,000 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\code\kj
+2022-02-21 14:47:05,001 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\code
+2022-02-21 14:47:05,235 DEBUG   HandlerThread:7448 [meta.py:_save_patches():168] save patches done
+2022-02-21 14:47:05,235 DEBUG   HandlerThread:7448 [meta.py:_save_pip():54] save pip
+2022-02-21 14:47:05,241 DEBUG   HandlerThread:7448 [meta.py:_save_pip():68] save pip done
+2022-02-21 14:47:05,242 DEBUG   HandlerThread:7448 [meta.py:_save_conda():75] save conda
+2022-02-21 14:47:06,011 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\diff.patch
+2022-02-21 14:47:06,013 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\requirements.txt
+2022-02-21 14:47:06,014 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\conda-environment.yaml
+2022-02-21 14:47:19,473 DEBUG   HandlerThread:7448 [meta.py:_save_conda():85] save conda done
+2022-02-21 14:47:19,474 DEBUG   HandlerThread:7448 [meta.py:probe():248] probe done
+2022-02-21 14:47:19,498 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: stop_status
+2022-02-21 14:47:19,499 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: stop_status
+2022-02-21 14:47:20,274 DEBUG   SenderThread:7448 [sender.py:send():235] send: run
+2022-02-21 14:47:20,481 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\config.yaml
+2022-02-21 14:47:20,483 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_created():217] file/dir created: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-metadata.json
+2022-02-21 14:47:21,077 INFO    SenderThread:7448 [sender.py:send_run():707] updated run: bnjtzcuv
+2022-02-21 14:47:21,079 DEBUG   SenderThread:7448 [sender.py:send():235] send: files
+2022-02-21 14:47:21,084 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-metadata.json with policy now
+2022-02-21 14:47:21,094 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file code\kj\sweep_Run4.py with policy now
+2022-02-21 14:47:21,101 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file diff.patch with policy now
+2022-02-21 14:47:22,436 INFO    Thread-29 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\AppData\Local\Temp\tmpdd8_rdp3wandb\1pl74twa-wandb-metadata.json
+2022-02-21 14:47:22,460 INFO    Thread-30 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\AppData\Local\Temp\tmpdd8_rdp3wandb\1110p08r-code/kj/sweep_Run4.py
+2022-02-21 14:47:22,509 INFO    Thread-31 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\AppData\Local\Temp\tmpdd8_rdp3wandb\29nbt6kj-diff.patch
+2022-02-21 14:47:22,910 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: stop_status
+2022-02-21 14:47:22,910 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: stop_status
+2022-02-21 14:47:25,746 DEBUG   SenderThread:7448 [sender.py:send():235] send: history
+2022-02-21 14:47:25,747 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:47:25,754 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:47:26,585 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:47:27,658 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:47:38,459 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: stop_status
+2022-02-21 14:47:38,459 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: stop_status
+2022-02-21 14:47:41,033 DEBUG   SenderThread:7448 [sender.py:send():235] send: stats
+2022-02-21 14:47:41,879 DEBUG   SenderThread:7448 [sender.py:send():235] send: history
+2022-02-21 14:47:41,881 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:47:41,884 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:47:42,199 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:47:43,206 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:47:53,948 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: stop_status
+2022-02-21 14:47:53,949 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: stop_status
+2022-02-21 14:47:55,519 DEBUG   SenderThread:7448 [sender.py:send():235] send: history
+2022-02-21 14:47:55,520 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:47:55,527 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:47:56,441 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:47:57,448 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:48:09,417 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: stop_status
+2022-02-21 14:48:09,418 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: stop_status
+2022-02-21 14:48:10,475 DEBUG   SenderThread:7448 [sender.py:send():235] send: history
+2022-02-21 14:48:10,476 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:48:10,478 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:48:10,682 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:48:11,734 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:48:19,987 DEBUG   SenderThread:7448 [sender.py:send():235] send: stats
+2022-02-21 14:48:24,936 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: stop_status
+2022-02-21 14:48:24,937 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: stop_status
+2022-02-21 14:48:30,287 DEBUG   SenderThread:7448 [sender.py:send():235] send: history
+2022-02-21 14:48:30,289 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:48:30,298 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:48:31,268 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:48:32,283 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:48:33,168 DEBUG   SenderThread:7448 [sender.py:send():235] send: history
+2022-02-21 14:48:33,169 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:48:33,171 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:48:33,302 INFO    Thread-12 :7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:48:33,530 DEBUG   SenderThread:7448 [sender.py:send():235] send: telemetry
+2022-02-21 14:48:33,532 DEBUG   SenderThread:7448 [sender.py:send():235] send: exit
+2022-02-21 14:48:33,533 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:33,533 INFO    SenderThread:7448 [sender.py:send_exit():371] handling exit code: 0
+2022-02-21 14:48:33,535 INFO    SenderThread:7448 [sender.py:send_exit():373] handling runtime: 95
+2022-02-21 14:48:33,537 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:48:33,538 INFO    SenderThread:7448 [sender.py:send_exit():379] send defer
+2022-02-21 14:48:33,538 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:33,539 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:33,540 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 0
+2022-02-21 14:48:33,540 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:33,540 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 0
+2022-02-21 14:48:33,541 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 1
+2022-02-21 14:48:33,541 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:33,542 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 1
+2022-02-21 14:48:33,719 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:33,720 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:33,720 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 1
+2022-02-21 14:48:33,721 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 2
+2022-02-21 14:48:33,722 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:33,723 DEBUG   SenderThread:7448 [sender.py:send():235] send: stats
+2022-02-21 14:48:33,724 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:33,724 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 2
+2022-02-21 14:48:33,725 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:33,726 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 2
+2022-02-21 14:48:33,726 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 3
+2022-02-21 14:48:33,727 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:33,728 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 3
+2022-02-21 14:48:33,729 DEBUG   SenderThread:7448 [sender.py:send():235] send: summary
+2022-02-21 14:48:33,732 INFO    SenderThread:7448 [sender.py:_save_file():944] saving file wandb-summary.json with policy end
+2022-02-21 14:48:33,734 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:33,734 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 3
+2022-02-21 14:48:33,734 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 4
+2022-02-21 14:48:33,735 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:33,735 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 4
+2022-02-21 14:48:33,736 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:33,736 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 4
+2022-02-21 14:48:33,836 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,238 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 5
+2022-02-21 14:48:34,239 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:34,240 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:34,240 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 5
+2022-02-21 14:48:34,241 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:34,241 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 5
+2022-02-21 14:48:34,241 INFO    SenderThread:7448 [dir_watcher.py:finish():283] shutting down directory watcher
+2022-02-21 14:48:34,321 INFO    SenderThread:7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\config.yaml
+2022-02-21 14:48:34,322 INFO    SenderThread:7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:48:34,322 INFO    SenderThread:7448 [dir_watcher.py:_on_file_modified():230] file/dir modified: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:48:34,323 INFO    SenderThread:7448 [dir_watcher.py:finish():313] scan: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files
+2022-02-21 14:48:34,324 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\conda-environment.yaml conda-environment.yaml
+2022-02-21 14:48:34,325 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\config.yaml config.yaml
+2022-02-21 14:48:34,326 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\diff.patch diff.patch
+2022-02-21 14:48:34,327 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log output.log
+2022-02-21 14:48:34,329 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\requirements.txt requirements.txt
+2022-02-21 14:48:34,346 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-metadata.json wandb-metadata.json
+2022-02-21 14:48:34,351 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json wandb-summary.json
+2022-02-21 14:48:34,352 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,367 INFO    SenderThread:7448 [dir_watcher.py:finish():327] scan save: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\code\kj\sweep_Run4.py code\kj\sweep_Run4.py
+2022-02-21 14:48:34,368 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 6
+2022-02-21 14:48:34,368 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:34,380 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:34,380 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 6
+2022-02-21 14:48:34,381 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:34,382 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 6
+2022-02-21 14:48:34,382 INFO    SenderThread:7448 [file_pusher.py:finish():177] shutting down file pusher
+2022-02-21 14:48:34,484 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,485 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:34,606 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,606 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:34,713 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,713 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:34,835 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,835 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:34,955 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:34,955 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,075 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,075 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,180 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,181 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,292 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,292 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,400 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,400 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,506 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,508 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,511 INFO    Thread-35 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\wandb-summary.json
+2022-02-21 14:48:35,515 INFO    Thread-32 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\config.yaml
+2022-02-21 14:48:35,547 INFO    Thread-34 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\requirements.txt
+2022-02-21 14:48:35,551 INFO    Thread-33 :7448 [upload_job.py:push():137] Uploaded file C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\files\output.log
+2022-02-21 14:48:35,626 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,627 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,734 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:35,735 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:35,766 INFO    Thread-11 :7448 [sender.py:transition_state():392] send defer: 7
+2022-02-21 14:48:35,767 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:35,768 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 7
+2022-02-21 14:48:35,768 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:35,768 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 7
+2022-02-21 14:48:35,845 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:36,704 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 8
+2022-02-21 14:48:36,704 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:36,705 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:36,705 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 8
+2022-02-21 14:48:36,705 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:36,706 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 8
+2022-02-21 14:48:36,706 INFO    SenderThread:7448 [sender.py:transition_state():392] send defer: 9
+2022-02-21 14:48:36,706 DEBUG   SenderThread:7448 [sender.py:send():235] send: final
+2022-02-21 14:48:36,707 DEBUG   SenderThread:7448 [sender.py:send():235] send: footer
+2022-02-21 14:48:36,708 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: defer
+2022-02-21 14:48:36,708 INFO    HandlerThread:7448 [handler.py:handle_request_defer():154] handle defer: 9
+2022-02-21 14:48:36,708 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: defer
+2022-02-21 14:48:36,708 INFO    SenderThread:7448 [sender.py:send_request_defer():388] handle sender defer: 9
+2022-02-21 14:48:36,816 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: poll_exit
+2022-02-21 14:48:36,817 DEBUG   SenderThread:7448 [sender.py:send_request():249] send_request: poll_exit
+2022-02-21 14:48:36,817 INFO    SenderThread:7448 [file_pusher.py:join():182] waiting for file pusher
+2022-02-21 14:48:37,718 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: get_summary
+2022-02-21 14:48:37,720 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: sampled_history
+2022-02-21 14:48:37,723 DEBUG   HandlerThread:7448 [handler.py:handle_request():131] handle_request: shutdown
+2022-02-21 14:48:37,723 INFO    HandlerThread:7448 [handler.py:finish():739] shutting down handler
+2022-02-21 14:48:38,711 INFO    WriterThread:7448 [datastore.py:close():281] close: C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_144653-bnjtzcuv\run-bnjtzcuv.wandb
+2022-02-21 14:48:38,726 INFO    SenderThread:7448 [sender.py:finish():1075] shutting down sender
+2022-02-21 14:48:38,726 INFO    SenderThread:7448 [file_pusher.py:finish():177] shutting down file pusher
+2022-02-21 14:48:38,726 INFO    SenderThread:7448 [file_pusher.py:join():182] waiting for file pusher
+2022-02-21 14:48:38,733 INFO    MainThread:7448 [internal.py:handle_exit():79] Internal process exited

@@ -1,0 +1,74 @@
+2022-02-21 15:26:42,727 INFO    Thread-338:16416 [wandb_setup.py:_flush():75] Loading settings from C:\Users\cseka\.config\wandb\settings
+2022-02-21 15:26:42,735 INFO    Thread-338:16416 [wandb_setup.py:_flush():75] Loading settings from wandb\settings
+2022-02-21 15:26:42,743 INFO    Thread-338:16416 [wandb_setup.py:_flush():75] Loading settings from environment variables: {'notebook_name': 'sweepTest', 'project': 'cs6910_assignment1', 'entity': 'kankan-jana', 'root_dir': 'C:\\Users\\cseka\\OneDrive\\Documents\\deeplearn\\Deep-Learning\\kj', 'run_id': 'fvvrv6pc', 'sweep_param_path': 'C:\\Users\\cseka\\OneDrive\\Documents\\deeplearn\\Deep-Learning\\kj\\wandb\\sweep-bfhpehvm\\config-fvvrv6pc.yaml', 'sweep_id': 'bfhpehvm'}
+2022-02-21 15:26:42,754 INFO    Thread-338:16416 [wandb_setup.py:_flush():75] Inferring run settings from compute environment: {'program_relpath': 'kj\\sweep_Run4.py', 'program': 'sweep_Run4.py'}
+2022-02-21 15:26:42,764 INFO    Thread-338:16416 [wandb_init.py:_log_setup():386] Logging user logs to C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_152642-fvvrv6pc\logs\debug.log
+2022-02-21 15:26:42,773 INFO    Thread-338:16416 [wandb_init.py:_log_setup():387] Logging internal logs to C:\Users\cseka\OneDrive\Documents\deeplearn\Deep-Learning\kj\wandb\run-20220221_152642-fvvrv6pc\logs\debug-internal.log
+2022-02-21 15:26:42,781 INFO    Thread-338:16416 [wandb_init.py:init():420] calling init triggers
+2022-02-21 15:26:42,790 INFO    Thread-338:16416 [wandb_init.py:init():427] wandb.init called with sweep_config: {'activation': 'tanh', 'batch': 100, 'dropout_rate': 0.6, 'epoch': 10, 'epochs': 5, 'layer1_size': 256, 'layer2_size': 128, 'lr': 0.015, 'optimizer': 'nadam'}
+config: {}
+2022-02-21 15:26:42,798 INFO    Thread-338:16416 [wandb_init.py:init():466] wandb.init() called when a run is still active
+2022-02-21 15:30:30,300 ERROR   Thread-7  :16416 [retry.py:__call__():126] Retry attempt failed:
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connection.py", line 141, in _new_conn
+    (self.host, self.port), self.timeout, **extra_kw)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "C:\ProgramData\Anaconda3\lib\socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connectionpool.py", line 601, in urlopen
+    chunked=chunked)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connectionpool.py", line 346, in _make_request
+    self._validate_conn(conn)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connectionpool.py", line 850, in _validate_conn
+    conn.connect()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connection.py", line 284, in connect
+    conn = self._new_conn()
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connection.py", line 150, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x0000013E57416C50>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\connectionpool.py", line 639, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "C:\ProgramData\Anaconda3\lib\site-packages\urllib3\util\retry.py", line 388, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x0000013E57416C50>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\wandb\sdk\lib\retry.py", line 102, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\wandb\sdk\internal\internal_api.py", line 140, in execute
+    return self.client.execute(*args, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\wandb\vendor\gql-0.2.0\gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\wandb\vendor\gql-0.2.0\gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\wandb\vendor\gql-0.2.0\gql\transport\requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\requests\sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\requests\sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\cseka\AppData\Roaming\Python\Python36\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x0000013E57416C50>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed',))
+2022-02-21 15:33:21,896 INFO    Thread-338:16416 [wandb_run.py:finish():1468] finishing run kankan-jana/cs6910_assignment1/fvvrv6pc
+2022-02-21 15:33:21,905 INFO    Thread-338:16416 [wandb_run.py:_atexit_cleanup():1797] got exitcode: 1
+2022-02-21 15:33:21,925 INFO    Thread-338:16416 [wandb_run.py:_restore():1769] restore
+2022-02-21 15:33:22,122 INFO    Thread-338:16416 [wandb_run.py:finish():1468] finishing run kankan-jana/cs6910_assignment1/fvvrv6pc

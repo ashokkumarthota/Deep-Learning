@@ -1,0 +1,105 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.10
+    code_path: code/kj/sweep_Run4.py
+    framework: keras
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.6.5
+    start_time: 1645435775
+    t:
+      1:
+      - 2
+      - 3
+      - 5
+      2:
+      - 2
+      - 3
+      - 5
+      3:
+      - 2
+      - 16
+      - 17
+      - 24
+      4: 3.6.5
+      5: 0.12.10
+      8:
+      - 3
+      - 5
+activation:
+  desc: null
+  value: tanh
+batch:
+  desc: null
+  value: 100
+dropout_rate:
+  desc: null
+  value: 0.6
+epoch:
+  desc: null
+  value: 5
+epochs:
+  desc: null
+  value: 5
+layer1_size:
+  desc: null
+  value: 256
+layer2_size:
+  desc: null
+  value: 128
+lr:
+  desc: null
+  value: 0.015
+method:
+  desc: null
+  value: grid
+metric:
+  desc: null
+  value:
+    goal: maximize
+    name: accuracy
+name:
+  desc: null
+  value: sweep
+optimizer:
+  desc: null
+  value: nadam
+parameters:
+  desc: null
+  value:
+    activation:
+      values:
+      - tanh
+      - relu
+    batch:
+      values:
+      - 100
+    dropout_rate:
+      values:
+      - 0
+      - 0.6
+    epoch:
+      values:
+      - 5
+      - 10
+    epochs:
+      values:
+      - 5
+    layer1_size:
+      values:
+      - 128
+      - 256
+    layer2_size:
+      values:
+      - 64
+      - 128
+    lr:
+      values:
+      - 0.015
+      - 0.002
+    optimizer:
+      values:
+      - nadam
