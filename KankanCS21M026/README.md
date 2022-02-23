@@ -53,7 +53,7 @@ FashnMnist(
 	,layer1_size=[Total hidden Nurons should present in first hidden /layes , DataType{Int}]
 	,layer2_size= [Total hidden Nurons should present in second hidden layes , DataType{Int}]
 	,layer3_size=[Total hidden Nurons should present in Third hidden layes , DataType{Int}]
-,layer4_size=[Total hidden Nurons should present in fourth hiddenlayes , DataType{Int}]
+	,layer4_size=[Total hidden Nurons should present in fourth hiddenlayes , DataType{Int}]
 	,layer5_size=[Total hidden Nurons should present in fifth hidden layes , DataType{Int}]
 	,optimizer=['rms','adam','nadam','sgd','mgd','nag' ,default:'mgd']
 	,initializer=['he','xavier','random',default: 'he']
