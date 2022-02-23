@@ -63,8 +63,9 @@ FashnMnist(
 	)
 ```
 Example
+ [checkout this notebook](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)
 ```
-Check out this notebook [click](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)
+
 #setup
 model=FashnMnist(
 		x=x_trainNorm
