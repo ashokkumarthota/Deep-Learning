@@ -1,8 +1,14 @@
 # For all coding questions, I followed the same flow as mentioned below
 
-###### 1. Importing the Required Packages
-
-###### 1. Importing the Required Packages
+#### 1. Importing the Required Packages
+#### 2. Setting the random seed
+#### 3. Splitting and Normalisation
+#### 4. Reserving 10% training data for testing (this data is different from validation)
+#### 5. One Hot Encoding 
+#### 6. Wandb  Configuration, Sweep Configuration, and generating Sweep Id (if required)
+#### 7.  Main Class or Logic
+#### 8. Calling Agent with Sweep Id or Creating Instance of the class and calling fit function
+#### 9. Displaying Accuracy
 
 
 
