@@ -21,3 +21,49 @@
 | Question 7    | [Question 7](https://github.com/ashokkumarthota/Deep-Learning/blob/main/ASHOK%20KUMAR%20THOTA%20CS21M009/7TH%20QUESTION%20(CONFUSION%20MATRIX).ipynb)       |
 |Question 8| [Question 8](https://github.com/ashokkumarthota/Deep-Learning/blob/main/ASHOK%20KUMAR%20THOTA%20CS21M009/8TH%20QUESTION(MEAN%20SQUARE%20ERROR).ipynb)  |
 
+
+
+## Neural Network Class
+#### Class Constructor
+```
+FFSN_MultiClass(
+  n_inputs : Number of features in the data (24*24=784 in this case)
+  ,n_outputs : Number of output classes (10 in this case)
+  ,noof_hidden : Number of Hidden Layers [2,3,4]
+  ,size_of_every_hidden : Size of every Hidden Layer [32,64,128]
+  ,init_method = Initialisation mathods ['random','xavier','he'] 
+  ,activation_function = Activation function ['sigmoid','tanh','relu','leaky_relu']
+  )
+```
+#### Object Creation 
+```
+ffsn_multi = FFSN_MultiClass(
+  n_inputs=784
+  ,n_outputs=10
+  ,noof_hidden=2
+  ,size_of_every_hidden=32
+  ,init_method='xavier'
+  ,activation_function='relu')
+```
+
+#### fit function
+```
+ffsn_multi.fit(
+  x_train : Normalized training data
+  ,y_OH_train : Classes for x_train in one hot encoding formate
+  ,epochs=5 : Number of epochs 
+  ,learning_rate : Learning rate
+  ,algo : Optimization algorithm
+  ,mini_batch_size : Batch size
+  )
+```
+#### calling the fit function
+```
+ffsn_multi.fit(
+  x_train
+  ,y_OH_train
+  ,epochs=5
+  ,learning_rate=0.001
+  ,algo= "Adam"
+  ,mini_batch_size=64)
+```
