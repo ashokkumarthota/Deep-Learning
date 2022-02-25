@@ -50,6 +50,7 @@ FashnMnist(
 	,lr=[Learning rate ,DataType:{Float}, default:.1]
 	,epochs =[Number of epochs]
 	,batch=[size of batches under one epoch]
+	,HiddenLayerNuron=[Hidden layer configuration: Example : [64,32,10] ] ***
 	,layer1_size=[Total hidden Nurons should present in first hidden /layes , DataType{Int}]
 	,layer2_size= [Total hidden Nurons should present in second hidden layes , DataType{Int}]
 	,layer3_size=[Total hidden Nurons should present in Third hidden layes , DataType{Int}]
@@ -66,8 +67,9 @@ FashnMnist(
          x_val=[Features used for cross validation during training.]
          y_val=[Labels used for cross validation during training.]
 	)
+***
 ```
-Example
+Example instead of using "HiddenLayerNuron" parameter user can use layer2_size,layer2_size,layer3_size,layer4_size,layer5_size to specify size of each hidden layers
  [checkout this notebook](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)
 ```
 
