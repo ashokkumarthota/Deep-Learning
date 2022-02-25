@@ -67,9 +67,9 @@ FashnMnist(
          x_val=[Features used for cross validation during training.]
          y_val=[Labels used for cross validation during training.]
 	)
-***
+***instead of using "HiddenLayerNuron" parameter user can use layer2_size,layer2_size,layer3_size,layer4_size,layer5_size to specify size of each hidden layers
 ```
-Example instead of using "HiddenLayerNuron" parameter user can use layer2_size,layer2_size,layer3_size,layer4_size,layer5_size to specify size of each hidden layers
+Example 
  [checkout this notebook](https://github.com/ashokkumarthota/Deep-Learning/blob/main/KankanCS21M026/QS2,3,4,5,6_Optimizers.ipynb)
 ```
 
