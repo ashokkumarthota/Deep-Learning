@@ -2,7 +2,7 @@
 
 #### 1. Importing the Required Packages
 #### 2. Setting the random seed
-#### 3. Splitting the fashion-mnist dataset as train and validation, and Normalisation
+#### 3.  Splitting the fashion-mnist dataset as train and validation, and done Normalisation
 #### 4. Reserving 10% training data for testing (this data is different from validation)
 #### 5. One Hot Encoding 
 #### 6. Wandb  Configuration, Sweep Configuration, and generating Sweep Id (if required)
