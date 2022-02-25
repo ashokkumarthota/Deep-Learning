@@ -60,7 +60,7 @@ FashnMnist(
 	,activation=['tanh','sigmoid','relu' default:'tanh']
 	,weight_decay=[weight decay for L2 regularization ,DataType:Float,default=0]
 	,dropout_rate=[DataType:Float,default=0]
-	//Following parameters only used when use wandb log features
+	*** //Following parameters only used when use wandb log features ***
 	 wandbLog=[log data in wandb][values=True,False] 
          wandb=[pass wandb object]
          x_val=[Features used for cross validation during training.]
